@@ -5,7 +5,7 @@ CREATE TABLE movie (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   link VARCHAR(255),
-  note VARCHAR(255),
+  note VARCHAR(765),
   keywords VARCHAR(255)
 );
 
@@ -25,3 +25,28 @@ CREATE TABLE screening (
   foreign key (movie_id) references movie(id),
   foreign key (venue_id) references venue(id)
 );
+
+INSERT INTO venue (name, address) values ('Anteo', 'Via Milazzo, 9, 20121 Milano');
+INSERT INTO venue (name, address) values ('Arcobaleno', 'Viale Tunisia, 11, 20124 Milano');
+INSERT INTO venue (name, address) values ('Mexico', 'Via Savona, 57, 20144 Milano');
+
+insert into movie (title, link) values('The Amazing Spider-Man', 'http://www.imdb.com/title/tt0948470');
+insert into movie (title, link) values('To Rome with Love','http://www.imdb.com/title/tt1859650');
+insert into movie (title, link) values('The Way Back','http://www.imdb.com/title/tt1911653');
+insert into movie (title, link) values('W.E.','http://www.imdb.com/title/tt1536048');
+
+update movie
+set note = 
+E'Two love stories, one historic and one contemporary, are interwoven. The famous romance between King Edward VIII and American divorcée Wallis Simpson is juxtaposed with the affair of a Russian security guard with a New York trophy wife Wally Winstrhop. Wally is obsessed with the story of Edward and the woman he loved, and embarks on her own research of their life together, even attending the Sotheby\'s auction of the Windsor Estate.' where id=4;
+
+update movie
+set note = 
+E'A story about a number of people in Italy — some American, some Italian, some residents, some visitors — and the romances and adventures and predicaments they get into. The film stars Allen, Alec Baldwin, Roberto Benigni, Penélope Cruz, Judy Davis, Jesse Eisenberg, Greta Gerwig and Ellen Page.' where id=2;
+
+update movie
+set note = 
+E'Directed by six-time Academy Award nominee Peter Weir, The Way Back is an epic story of survival, solidarity and indomitable human will. Shot in Bulgaria, Morocco and India, the film stars Jim Sturgess (Across the Universe, The Other Boleyn Girl), Ed Harris (Appaloosa) and Colin Farrell (In Bruges) as prisoners of a Soviet Union labor camp, who, along with four others, flee their Siberian Gulag and begin a treacherous journey across thousands of miles of hostile terrain.' where id=3;
+
+update movie
+set note = 
+E'The Amazing Spider-Man is the story of Peter Parker (Garfield), an outcast high schooler who was abandoned by his parents as a boy, leaving him to be raised by his Uncle Ben (Sheen) and Aunt May (Field). Like most teenagers, Peter is trying to figure out who he is and how he got to be the person he is today.' where id=1;
