@@ -50,3 +50,13 @@ E'Directed by six-time Academy Award nominee Peter Weir, The Way Back is an epic
 update movie
 set note = 
 E'The Amazing Spider-Man is the story of Peter Parker (Garfield), an outcast high schooler who was abandoned by his parents as a boy, leaving him to be raised by his Uncle Ben (Sheen) and Aunt May (Field). Like most teenagers, Peter is trying to figure out who he is and how he got to be the person he is today.' where id=1;
+
+insert into screening (movie_id, venue_id, time) values(1,1,'2012/09/03 15:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(1,1,'2012/09/03 17:30'::timestamp);
+insert into screening (movie_id, venue_id, time) values(1,1,'2012/09/03 20:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(1,1,'2012/09/03 22:30'::timestamp);
+
+insert into screening (movie_id, venue_id, time) values(1,2,'2012/09/04 22:30'::timestamp);
+insert into screening (movie_id, venue_id, time) values(1,2,'2012/09/04 20:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(1,2,'2012/09/04 17:30'::timestamp);
+insert into screening (movie_id, venue_id, time) values(1,2,'2012/09/04 15:00'::timestamp);
