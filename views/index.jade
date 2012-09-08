@@ -3,14 +3,14 @@ extends layout
 block content
 	h1= title
 	p Welcome to #{title}
+	
 	if (error)
 		div.error #{error}
-	if (result && result.length > 0)
+	if (result)
 		div.result
-			for (var i = 0; i < result.length; i++)
-				var row = result[i];
+			each temp in result.rows
 				div.result-row
 					div.result-column
-						a(href='#{row.link}') #{row.title}
+						a(href='#{temp.link}') #{temp.title}
 	else
 		div.empty-result Empty result
