@@ -14,3 +14,9 @@ block content
 						a(href='#{temp.link}') #{temp.title}
 	else
 		div.empty-result Empty result
+	if (weeks)
+		div.weeks
+			each week in weeks
+				div.week Monday: #{week.monday}, sunday: #{week.sunday}
+	else
+		div.no-weeks Something went wrong with weeks computation

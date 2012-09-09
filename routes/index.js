@@ -1,3 +1,5 @@
+require('date-utils');
+
 var DBTYPE_POSTGRES = 'pg';
 var DBTYPE_MYSQL = 'mysql';
 
@@ -70,8 +72,27 @@ var DB = function(config) {
 }
 
 exports.index = function(req, res){
-	//var connectionString = 'postgres://root:root@localhost:5432/sound_motion';
-	//var pg = require('pg');
+	var dateFormat = 'YYYY-MM-DD';
+	var now = new Date();
+	var dayOfWeek = (now.getDay() + 6) % 7;
+	var monday = now.clone();
+	monday.addDays(-dayOfWeek);
+	var sunday = monday.clone()
+	sunday.addDays(6);
+	var lastMonday = monday.clone();
+	lastMonday.addDays(-7);
+	var lastSunday = sunday.clone()
+	lastSunday.addDays(-7);
+	var nextMonday = monday.clone();
+	nextMonday.addDays(7);
+	var nextSunday = sunday.clone()
+	nextSunday.addDays(7);
+	var weeks = [
+		{monday: lastMonday.toFormat(dateFormat), sunday: lastSunday.toFormat(dateFormat)},
+		{monday: monday.toFormat(dateFormat), sunday: sunday.toFormat(dateFormat)},
+		{monday: nextMonday.toFormat(dateFormat), sunday: nextSunday.toFormat(dateFormat)}
+	];
+
 	var db = new DB(USE_DBTYPE == DBTYPE_POSTGRES ? {
 		engineType: DBTYPE_POSTGRES,
 		host: 'localhost',
@@ -88,27 +109,11 @@ exports.index = function(req, res){
 		password: 'root'
 	});
 	
-	/*pg.connect(connectionString, function(error, client) {
-		if (error) {
-			console.log(error);
-			res.render('index', {title: 'Express', error: error, result: false});
-		} else {
-			client.query('SELECT * FROM movie', function(error, result) {
-				if (error) {
-					console.log(error);
-					res.render('index', {title: 'Express', error: error, result: false});
-				} else {
-					res.render('index', {title: 'Express', error: false, result: result});
-				}
-			});
-		}
-	});*/
-	
 	db.query('SELECT * FROM movie', function(result) {
 		console.log(result);
-		res.render('index', {title: 'Express', error: false, result: result});
+		res.render('index', {title: 'Express', error: false, result: result, weeks: weeks});
 	}, function(error) {
 		console.log(error);
-		res.render('index', {title: 'Express', error: error, result: false});
+		res.render('index', {title: 'Express', error: error, result: false, weeks: weeks});
 	});
 };
