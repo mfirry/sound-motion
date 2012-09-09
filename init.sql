@@ -80,3 +80,24 @@ insert into screening (movie_id, venue_id, time) values(2,3,'2012/09/13 15:20'::
 insert into screening (movie_id, venue_id, time) values(2,3,'2012/09/13 17:40'::timestamp);
 insert into screening (movie_id, venue_id, time) values(2,3,'2012/09/13 20:00'::timestamp);
 insert into screening (movie_id, venue_id, time) values(2,3,'2012/09/13 22:00'::timestamp);
+	
+insert into screening (movie_id, venue_id, time) values(3,1,'2012/09/17 12:40'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,1,'2012/09/17 15:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,1,'2012/09/17 17:30'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,1,'2012/09/17 20:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,1,'2012/09/17 22:30'::timestamp);
+	
+insert into screening (movie_id, venue_id, time) values(3,2,'2012/09/18 15:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,2,'2012/09/18 17:30'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,2,'2012/09/18 20:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,2,'2012/09/18 22:30'::timestamp);
+	
+insert into screening (movie_id, venue_id, time) values(3,3,'2012/09/17 12:40'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,3,'2012/09/17 15:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,3,'2012/09/17 17:30'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,3,'2012/09/17 20:00'::timestamp);
+insert into screening (movie_id, venue_id, time) values(3,3,'2012/09/17 22:30'::timestamp);
+	
+
+	
+	
