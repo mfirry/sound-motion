@@ -8,7 +8,7 @@ block content
 		div.error #{error}
 	if (result)
 		div.result
-			each temp in result.rows
+			each temp in result
 				div.result-row
 					div.result-column
 						a(href='#{temp.link}') #{temp.title}
