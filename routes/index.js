@@ -3,7 +3,7 @@ require('date-utils');
 var DBTYPE_POSTGRES = 'pg';
 var DBTYPE_MYSQL = 'mysql';
 
-var USE_DBTYPE = DBTYPE_MYSQL;
+var USE_DBTYPE = DBTYPE_POSTGRES;
 
 var DB = function(config) {
 	this.config = config || {};
@@ -109,9 +109,18 @@ exports.index = function(req, res){
 		password: 'root'
 	});
 	
-	db.query('SELECT * FROM movie', function(result) {
-		console.log(result);
-		res.render('index', {title: 'Express', error: false, result: result, weeks: weeks});
+	var movies = new Array();
+	var query1 = 'SELECT distinct movie_id AS id FROM screening where date >=\''+lastMonday.toYMD('-')+'\' UNION SELECT distinct movie_id FROM screening where date <=\''+nextSunday.toYMD('-')+'\'';
+	db.query(query1, function(resultZ) {
+		console.log(resultZ);
+		for (i=0; i<resultZ.length; i++) {
+			//console.log(result[i]);
+			db.query('SELECT * FROM movie where id='+resultZ[i].id, function(result2) {
+					movies.push(result2[0]);
+				}
+			);
+		}
+		res.render('index', {title: 'Express', error: false, result: movies, weeks: weeks});
 	}, function(error) {
 		console.log(error);
 		res.render('index', {title: 'Express', error: error, result: false, weeks: weeks});
