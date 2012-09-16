@@ -50,7 +50,7 @@ exports.index = function(req, res){
 			(function(query) {
 				callbacks.push(function(callback) {
 					db.query(query, function(result) {
-						callback(null, result);
+						callback(null, result[0]);
 					});
 				});
 			})(secondQuery);
