@@ -52,16 +52,21 @@ exports.index = function(req, res){
 					var movies = {};
 					for (var j = 0; j < results.length; j++) {
 						var movie = results[j];
-						if (movies[movie.id]) {
-							movies[movie.id].dates.push({date: movie.date, time: movie.time});
-						} else {
+						if (!movies[movie.id]) {
 							movies[movie.id] = {
 								id: movie.id,
 								title: movie.title,
+								link: movie.link,
 								note: movie.note,
-								dates: [{date: movie.date, time: movie.time}]
+								dates: {}
 							};
 						}
+						var date = movie.date.toYMD();
+						if (!movies[movie.id].dates[date]) {
+							movies[movie.id].dates[date] = [];
+							movies[movie.id].dates[date].date = movie.date;
+						}
+						movies[movie.id].dates[date].push(movie.time);
 					}
 					callback(null, movies);
 				});
@@ -77,31 +82,4 @@ exports.index = function(req, res){
 			res.render('index', {error: error, weeks: results});
 		}
 	});
-	
-	/*var mainQuery = 'SELECT distinct movie_id AS id FROM screening where date >=\'' + lastMonday.toYMD('-') + '\' AND date <=\'' + nextSunday.toYMD('-') + '\'';
-	db.query(mainQuery, function(results) {
-		var callbacks = [];
-		for (var i = 0; i < results.length; i++) {
-			var secondQuery = 'SELECT * FROM movie where id = ' + results[i].id;
-			(function(query) {
-				callbacks.push(function(callback) {
-					db.query(query, function(result) {
-						callback(null, result[0]);
-					});
-				});
-			})(secondQuery);
-		}
-		async.parallel(callbacks, function(error, results){
-			if (error) {
-				console.log(error);
-				res.render('index', {title: 'Express', error: error, result: false, weeks: weeks});
-			} else {
-				console.log(results);
-				res.render('index', {title: 'Express', error: error, result: results, weeks: weeks});
-			}
-		});
-	}, function(error) {
-		console.log(error);
-		res.render('index', {title: 'Express', error: error, result: false, weeks: weeks});
-	});*/
 };

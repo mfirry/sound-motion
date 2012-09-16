@@ -1,21 +1,29 @@
 extends layout
 
 block content
-	h1 Express
-	p Welcome to Express
+	h1 Sound Motion
 	
 	if (error)
 		div.error #{error}
+		
 	if (weeks)
-		div.weeks
-			each week in weeks
-				div.week
-					each movie in week
-						a(href='#{movie.link}') #{movie.title}
-						if (movie.dates)
-							div.dates
-								each date in movie.dates
-									div.date #{date.date} #{date.time}
+		each week in weeks
+			each movie in week
+				div.row
+					div.span12
+						a(href='#{movie.link}')= movie.title
+				div.row
+					each date in movie.dates
+						div.span4
+							div.row
+								div.span4= date.date.toFormat('MMMM D YYYY')
+							div.row
+								div.span4
+									each time in date
+										span #{time.substr(0, 5)}, 
+				div.row
+					div.span12
+						p= movie.note
 	else
 		div.no-weeks Empty result
 
