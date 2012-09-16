@@ -42,7 +42,7 @@ exports.index = function(req, res){
 		password: 'root'
 	});
 	
-	var mainQuery = 'SELECT distinct movie_id AS id FROM screening where date >=\'' + lastMonday.toYMD('-') + '\' UNION SELECT distinct movie_id FROM screening where date <=\'' + nextSunday.toYMD('-') + '\'';
+	var mainQuery = 'SELECT distinct movie_id AS id FROM screening where date >=\'' + lastMonday.toYMD('-') + '\' AND date <=\'' + nextSunday.toYMD('-') + '\'';
 	db.query(mainQuery, function(results) {
 		var callbacks = [];
 		for (var i = 0; i < results.length; i++) {
