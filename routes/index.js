@@ -2,7 +2,7 @@ require('date-utils');
 var async = require('async');
 var dbi = require('../libs/db');
 
-var USE_DBTYPE = dbi.DBTYPE_MYSQL;
+var USE_DBTYPE = dbi.DBTYPE_POSTGRES;
 
 exports.index = function(req, res){
 	var dateFormat = 'YYYY-MM-DD';
@@ -45,7 +45,7 @@ exports.index = function(req, res){
 	var callbacks = [];
 	for (var i = 0; i < weeks.length; i++) {
 		var week = weeks[i];
-		var mainQuery = 'SELECT movie.id AS id, title, link, note, `date`, `time` FROM screening JOIN movie ON screening.movie_id = movie.id WHERE `date` >= \'' + week.monday.toYMD() + '\' AND `date` <= \'' + week.sunday.toYMD() + '\'';
+		var mainQuery = 'SELECT movie.id AS id, title, link, note, date, time FROM screening JOIN movie ON screening.movie_id = movie.id WHERE date >= \'' + week.monday.toYMD() + '\' AND date <= \'' + week.sunday.toYMD() + '\'';
 		(function(query) {
 			callbacks.push(function(callback) {
 				db.query(query, function(results) {
