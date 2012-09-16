@@ -47,18 +47,20 @@ exports.index = function(req, res){
 		var callbacks = [];
 		for (var i = 0; i < results.length; i++) {
 			var secondQuery = 'SELECT * FROM movie where id = ' + results[i].id;
-			callbacks.push(function(callback) {
-				console.log(secondQuery);
-				db.query(secondQuery, function(result) {
-					callback(null, result);
+			(function(query) {
+				callbacks.push(function(callback) {
+					db.query(query, function(result) {
+						callback(null, result);
+					});
 				});
-			});
+			})(secondQuery);
 		}
 		async.parallel(callbacks, function(error, results){
 			if (error) {
 				console.log(error);
 				res.render('index', {title: 'Express', error: error, result: false, weeks: weeks});
 			} else {
+				console.log(results);
 				res.render('index', {title: 'Express', error: error, result: results, weeks: weeks});
 			}
 		});
