@@ -19,7 +19,8 @@ var DB = function(config) {
 	
 	if (this.config.engineType == DBTYPE_POSTGRES) {
 		this.client = this.engine;
-		this.connectionString = 'postgres://' + this.config.user + ':' + this.config.password + '@' + this.config.host + ':' + this.config.port + '/' + this.config.database;
+		this.connectionString = process.env.DATABASE_URL;
+		//'postgres://' + this.config.user + ':' + this.config.password + '@' + this.config.host + ':' + this.config.port + '/' + this.config.database;
 		this.query = function(query, callback, errorCallback) {
 			this.engine.connect(this.connectionString, function(error, client) {
 				if (error) {
