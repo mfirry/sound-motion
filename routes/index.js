@@ -27,7 +27,7 @@ exports.index = function(req, res){
 	];
 
 	var db = new dbi.DB(USE_DBTYPE == dbi.DBTYPE_POSTGRES ? {
-		engineType: DBTYPE_POSTGRES,
+		engineType: dbi.DBTYPE_POSTGRES,
 		host: 'localhost',
 		port: '5432',
 		database: 'sound_motion',
