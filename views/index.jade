@@ -1,22 +1,21 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
+	h1 Express
+	p Welcome to Express
 	
 	if (error)
 		div.error #{error}
-	if (result)
-		div.result
-			each temp in result
-				div.result-row
-					div.result-column
-						a(href='#{temp.link}') #{temp.title}
-	else
-		div.empty-result Empty result
 	if (weeks)
 		div.weeks
 			each week in weeks
-				div.week Monday: #{week.monday}, sunday: #{week.sunday}
+				div.week
+					each movie in week
+						a(href='#{movie.link}') #{movie.title}
+						if (movie.dates)
+							div.dates
+								each date in movie.dates
+									div.date #{date.date} #{date.time}
 	else
-		div.no-weeks Something went wrong with weeks computation
+		div.no-weeks Empty result
+
