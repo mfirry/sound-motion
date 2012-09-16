@@ -16,11 +16,14 @@ block content
 					each date in movie.dates
 						div.span4
 							div.row
-								div.span4= date.date.toFormat('MMMM D YYYY')
+								div.span4= date.date.toFormat('MMMM DD YYYY')
 							div.row
 								div.span4
-									each time in date
-										span #{time.substr(0, 5)}, 
+									each time, i in date
+										if(i == date.length -1)
+											span #{time.substr(0, 5)}
+										else
+											span #{time.substr(0, 5)}, 
 				div.row
 					div.span12
 						p= movie.note
