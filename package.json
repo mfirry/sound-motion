@@ -9,7 +9,7 @@
     "express": "3.0.0rc1",
     "jade": "*",
     "pg": "0.8.3",
-	"async": 0.1.22",
+	"async": "0.1.22",
 	"date-utils": "1.2.11"
   },
   "engines": {
