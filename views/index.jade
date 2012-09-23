@@ -9,24 +9,26 @@ block content
 	if (weeks)
 		each week in weeks
 			each movie in week
-				div.row
+				div.row.movie
 					div.span12
-						a(href='#{movie.link}')= movie.title
-				div.row
-					each date in movie.dates
-						div.span4
-							div.row
-								div.span4= date.date.toFormat('MMMM DD YYYY')
-							div.row
+						div.row
+							div.span12
+								a(href='#{movie.link}')= movie.title
+						div.row
+							each date in movie.dates
 								div.span4
-									each time, i in date
-										if(i == date.length -1)
-											span #{time.substr(0, 5)}
-										else
-											span #{time.substr(0, 5)}, 
-				div.row
-					div.span12
-						p= movie.note
+									div.row
+										div.span4= date.date.toFormat('MMMM DD YYYY')
+									div.row
+										div.span4
+											each time, i in date
+												if(i == date.length -1)
+													span #{time.substr(0, 5)}
+												else
+													span #{time.substr(0, 5)}, 
+						div.row
+							div.span12
+								p= movie.note
 	else
 		div.no-weeks Empty result
 

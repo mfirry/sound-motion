@@ -6,3 +6,12 @@ body {
 a {
 	color: #00B7FF;
 }
+
+.movie {
+	margin: 8px 0px;
+	padding: 12px 0px;
+	border: 2px solid #000000;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+}
