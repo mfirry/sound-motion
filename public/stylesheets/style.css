@@ -7,11 +7,40 @@ a {
 	color: #00B7FF;
 }
 
-.movie {
-	margin: 8px 0px;
-	padding: 12px 0px;
-	border: 2px solid #000000;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border-radius: 12px;
+.movie-top {
+	overflow: hidden;
+	margin: 8px 0px 0px 0px;
+	padding: 12px 0px 0px 0px;
+	border-top: 2px solid #000000;
+	border-left: 2px solid #000000;
+	border-right: 2px solid #000000;
+	-webkit-border-top-left-radius: 12px;
+	-webkit-border-top-right-radius: 12px;
+	-moz-border-radius-topleft: 12px;
+	-moz-border-radius-topright: 12px;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+}
+
+.movie-middle {
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	border-left: 2px solid #000000;
+	border-right: 2px solid #000000;
+}
+
+.movie-bottom {
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px 0px 12px 0px;
+	border-bottom: 2px solid #000000;
+	border-left: 2px solid #000000;
+	border-right: 2px solid #000000;
+	-webkit-border-bottom-right-radius: 12px;
+	-webkit-border-bottom-left-radius: 12px;
+	-moz-border-radius-bottomright: 12px;
+	-moz-border-radius-bottomleft: 12px;
+	border-bottom-right-radius: 12px;
+	border-bottom-left-radius: 12px;
 }

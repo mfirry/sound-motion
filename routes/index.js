@@ -2,7 +2,7 @@ require('date-utils');
 var async = require('async');
 var dbi = require('../libs/db');
 
-var USE_DBTYPE = dbi.DBTYPE_POSTGRES;
+var USE_DBTYPE = dbi.DBTYPE_MYSQL;
 
 exports.index = function(req, res){
 	var dateFormat = 'YYYY-MM-DD';
