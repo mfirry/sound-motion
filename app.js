@@ -28,7 +28,7 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
-app.listen(3000, function(){
+app.listen(25678, function(){
 	console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
 
