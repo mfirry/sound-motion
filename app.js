@@ -44,8 +44,8 @@ app.get('/', function(req, res){
 	var Screening = db.model('Screening', screening)
 
 	console.log(moment(new Date()));
+    console.log(moment(new Date()).day(0));
 	console.log(moment(new Date()).day(14));
-	console.log(moment(new Date()).day(0));
 
 	var lastSunday = moment(new Date()).day(0).toDate();
 	var nextSunday = moment(new Date()).day(14).toDate();
@@ -76,10 +76,12 @@ app.get('/create', function(req, res){
 	var Screening = db.model('Screening', screening)
     var de = require('./data_entry');
 	var uno = new Movie(entry1);
+    var due = new Movie(entry2);
     
     uno.save();
+    due.save();
     
-    res.send(uno);
+    res.send(due);
 });
 
 app.listen(3000, function() {
