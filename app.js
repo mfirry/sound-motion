@@ -55,7 +55,7 @@ app.get('/', function(req, res){
         res.send(screenings);
     });
     
-    mongoose.disconnect();
+    db.disconnect();
     
     // Movie.find({}, function(err, screenings){
     //     console.log(screenings);
@@ -90,7 +90,7 @@ app.get('/create', function(req, res) {
         console.log('inserting :' + de.movies[k].title);
         new Movie(de.movies[k]).save();
     }
-    mongoose.disconnect();
+    db.disconnect();
     res.send("ok");
 });
 
