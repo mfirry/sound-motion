@@ -75,13 +75,16 @@ app.get('/create', function(req, res){
 	var Movie = db.model('Movie',movie);
 	var Screening = db.model('Screening', screening)
     var de = require('./data_entry');
-	var uno = new Movie(entry1);
-    var due = new Movie(entry2);
+
+    new Movie(entry1).save();
+    new Movie(entry2).save();
+    new Movie(entry3).save();
+    new Movie(entry4).save();
     
-    uno.save();
-    due.save();
+    // uno.save();
+    // due.save();
     
-    res.send(due);
+    res.send("ok");
 });
 
 app.listen(3000, function() {

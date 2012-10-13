@@ -40,5 +40,16 @@ module.exports = {
             "venue": "mexico",
             "dates": [new Date(Date.parse("2012-10-25T13:00")), new Date(Date.parse("2012-10-25T15:20")), new Date(Date.parse("2012-10-25T17:40")), new Date(Date.parse("2012-10-25T20:00")), new Date(Date.parse("2012-10-25T22:15"))]
         }]
-    }
+    },
+    entry4: entry4 = {
+        "title": "THE WORDS",
+        "description": "In The Words, an aspiring writer claims another man’s long lost work as his own only to find there are steep consequences when ambition is valued above life’s most fundamental, impassioned three words.",
+        "screenings": [{
+            "venue": "anteo",
+            "dates": [new Date(Date.parse("2012-10-29T13:00")), new Date(Date.parse("2012-10-29T15:20")), new Date(Date.parse("2012-10-29T17:40")), new Date(Date.parse("2012-10-29T20:00")), new Date(Date.parse("2012-10-22T22:00"))]
+        }, {
+            "venue": "Arcobaleno",
+            "dates": [new Date(Date.parse("2012-10-30T15:20")), new Date(Date.parse("2012-10-30T17:40")), new Date(Date.parse("2012-10-30T20:00")), new Date(Date.parse("2012-10-30T22:00"))]
+        }]
+    }    
 }
