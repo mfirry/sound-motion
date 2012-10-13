@@ -61,37 +61,39 @@ app.get('/', function(req, res){
     // });
 });
 
-app.get('/create', function(req, res){
-	var mongoose = require('mongoose')
-	try {
+app.get('/create', function(req, res) {
+    var mongoose = require('mongoose')
+    try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
-    } catch(e) {
+    } catch (e) {
         db = mongoose.createConnection('localhost', 'local');
     }
 
-	var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
-	var screening = new mongoose.Schema ({venue: String, dates: [Date]});
+    var movie = new mongoose.Schema({
+        title: String,
+        description: String,
+        screenings: [screening]
+    });
+    var screening = new mongoose.Schema({
+        venue: String,
+        dates: [Date]
+    });
 
-	var Movie = db.model('Movie',movie);
-	var Screening = db.model('Screening', screening)
+    var Movie = db.model('Movie', movie);
+    var Screening = db.model('Screening', screening)
     var de = require('./data_entry');
 
-    new Movie(entry1).save();
-    new Movie(entry2).save();
-    new Movie(entry3).save();
-    new Movie(entry4).save();
-    
-    // uno.save();
-    // due.save();
-    
+    for (k in de.movies) {
+        console.log('inserting :' + de.movies[k].title);
+        new Movie(de.movies[k]).save();
+    }
+
     res.send("ok");
 });
 
 app.listen(3000, function() {
     console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
-
-
 
 /*http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
