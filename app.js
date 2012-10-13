@@ -55,6 +55,8 @@ app.get('/', function(req, res){
         res.send(screenings);
     });
     
+    mongoose.disconnect();
+    
     // Movie.find({}, function(err, screenings){
     //     console.log(screenings);
     //     res.send(screenings);
