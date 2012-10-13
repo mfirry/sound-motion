@@ -88,7 +88,7 @@ app.get('/create', function(req, res) {
         console.log('inserting :' + de.movies[k].title);
         new Movie(de.movies[k]).save();
     }
-
+    mongoose.disconnect();
     res.send("ok");
 });
 
