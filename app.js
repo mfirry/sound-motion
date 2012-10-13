@@ -30,17 +30,18 @@ app.configure('development', function(){
 
 //app.get('/', routes.index);
 app.get('/', function(req, res){
-
 	var mongoose = require('mongoose')
-	  , db = mongoose.createConnection('localhost', 'local');
+	try {
+        db = mongoose.connect(process.env.MONGOHQ_URL);
+    } catch(e) {
+        db = mongoose.createConnection('localhost', 'local');
+    }
 
 	var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
 	var screening = new mongoose.Schema ({venue: String, dates: [Date]});
 
 	var Movie = db.model('Movie',movie);
 	var Screening = db.model('Screening', screening)
-
-	var fluffy = new Movie({ title: 'fluffy', description: "", screenings: [] }).save();
 
 	console.log(moment(new Date()));
 	console.log(moment(new Date()).day(14));
@@ -49,15 +50,42 @@ app.get('/', function(req, res){
 	var lastSunday = moment(new Date()).day(0).toDate();
 	var nextSunday = moment(new Date()).day(14).toDate();
 
-	Movie.find({"screenings.date":{$gte:lastSunday, $lte:nextSunday}}, function(err, screenings){
-		console.log(screenings);
-	    res.send(screenings);
-	});
+    Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, screenings){
+        console.log(screenings);
+        res.send(screenings);
+    });
+    
+    // Movie.find({}, function(err, screenings){
+    //     console.log(screenings);
+    //     res.send(screenings);
+    // });
 });
 
-app.listen(3000, function(){
-	console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
+app.get('/create', function(req, res){
+	var mongoose = require('mongoose')
+	try {
+        db = mongoose.connect(process.env.MONGOHQ_URL);
+    } catch(e) {
+        db = mongoose.createConnection('localhost', 'local');
+    }
+
+	var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
+	var screening = new mongoose.Schema ({venue: String, dates: [Date]});
+
+	var Movie = db.model('Movie',movie);
+	var Screening = db.model('Screening', screening)
+    var de = require('./data_entry');
+	var uno = new Movie(entry1);
+    
+    uno.save();
+    
+    res.send(uno);
 });
+
+app.listen(3000, function() {
+    console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
+});
+
 
 
 /*http.createServer(app).listen(app.get('port'), function(){
