@@ -52,10 +52,9 @@ app.get('/', function(req, res){
 
     Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, screenings){
         console.log(screenings);
+        db.disconnect();
         res.send(screenings);
     });
-    
-    db.disconnect();
     
     // Movie.find({}, function(err, screenings){
     //     console.log(screenings);
