@@ -65,6 +65,7 @@ app.get('/create', function(req, res) {
     var mongoose = require('mongoose')
     try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
+        console.log('db_url: '+process.env.MONGOHQ_URL);
     } catch (e) {
         db = mongoose.createConnection('localhost', 'local');
     }
