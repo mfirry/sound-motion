@@ -30,12 +30,12 @@ app.configure('development', function(){
 
 app.get('/', function(req, res){
     console.log('db_url: '+process.env.MONGOHQ_URL);
-	var mongoose = require('mongoose')
-	try {
+	var mongoose = require('mongoose');
+    // try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
-    } catch(e) {
-        db = mongoose.createConnection('localhost', 'local');
-    }
+    // } catch(e) {
+    //     db = mongoose.createConnection('localhost', 'local');
+    // }
 
 	var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
 	var screening = new mongoose.Schema ({venue: String, dates: [Date]});
@@ -62,13 +62,13 @@ app.get('/', function(req, res){
 });
 
 app.get('/create', function(req, res) {
-    var mongoose = require('mongoose')
-    try {
+    var mongoose = require('mongoose');
+    // try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
         console.log('db_url: '+process.env.MONGOHQ_URL);
-    } catch (e) {
-        db = mongoose.createConnection('localhost', 'local');
-    }
+    // } catch (e) {
+    //     db = mongoose.createConnection('localhost', 'local');
+    // }
 
     var movie = new mongoose.Schema({
         title: String,
