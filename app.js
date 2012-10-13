@@ -28,8 +28,8 @@ app.configure('development', function(){
 	app.use(express.errorHandler());
 });
 
-//app.get('/', routes.index);
 app.get('/', function(req, res){
+    console.log('db_url: '+process.env.MONGOHQ_URL);
 	var mongoose = require('mongoose')
 	try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
