@@ -92,7 +92,7 @@ app.get('/create', function(req, res) {
     res.send("ok");
 });
 
-app.listen(3000, function() {
+app.listen(app.get('port') || 3000, function() {
     console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
 
