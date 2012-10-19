@@ -8,14 +8,17 @@ var moment = require('moment');
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path');
-
+  , path = require('path')
+  , cons = require('consolidate')
+  , name = 'mustache';
+  
 var app = express();
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
-	app.set('view engine', 'jade');
+	app.set('view engine', 'hjs');
+    app.engine('.hjs', cons.mustache);
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
@@ -29,13 +32,13 @@ app.configure('development', function(){
 });
 
 app.get('/', function(req, res){
-    console.log('db_url: '+process.env.MONGOHQ_URL);
+    //console.log('db_url: '+process.env.MONGOHQ_URL);
 	var mongoose = require('mongoose');
-    // try {
+    try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
-    // } catch(e) {
-    //     db = mongoose.createConnection('localhost', 'local');
-    // }
+    } catch(e) {
+        db = mongoose.createConnection('localhost', 'local');
+    }
 
 	var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
 	var screening = new mongoose.Schema ({venue: String, dates: [Date]});
@@ -43,17 +46,24 @@ app.get('/', function(req, res){
 	var Movie = db.model('Movie',movie);
 	var Screening = db.model('Screening', screening)
 
-	console.log(moment(new Date()));
-    console.log(moment(new Date()).day(0));
-	console.log(moment(new Date()).day(14));
+	// console.log(moment(new Date()));
+ //    console.log(moment(new Date()).day(0));
+	// console.log(moment(new Date()).day(14));
 
 	var lastSunday = moment(new Date()).day(0).toDate();
 	var nextSunday = moment(new Date()).day(14).toDate();
 
-    Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, screenings){
-        console.log(screenings);
-        db.disconnect();
-        res.send(screenings);
+    Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
+        console.log(movies);
+        // db.disconnect();
+        res.render('index', {
+            movies: movies,
+            pippo: function(a) {
+                console.log("LA LAMBDA");
+                console.log(a);
+                return moment(a).format("MMM Do YY")
+            }
+        });
     });
     
     // Movie.find({}, function(err, screenings){
@@ -64,12 +74,12 @@ app.get('/', function(req, res){
 
 app.get('/create', function(req, res) {
     var mongoose = require('mongoose');
-    // try {
+    try {
         db = mongoose.connect(process.env.MONGOHQ_URL);
         console.log('db_url: '+process.env.MONGOHQ_URL);
-    // } catch (e) {
-    //     db = mongoose.createConnection('localhost', 'local');
-    // }
+    } catch (e) {
+        db = mongoose.createConnection('localhost', 'local');
+    }
 
     var movie = new mongoose.Schema({
         title: String,
@@ -89,7 +99,7 @@ app.get('/create', function(req, res) {
         console.log('inserting :' + de.movies[k].title);
         new Movie(de.movies[k]).save();
     }
-    db.disconnect();
+    // db.disconnect();
     res.send("ok");
 });
 

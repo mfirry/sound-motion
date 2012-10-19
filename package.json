@@ -6,8 +6,10 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.0.0rc1",
-    "jade": "*",
+    "express": "3.0.0rc4",
+    "hjs": "*",
+    "consolidate": "*",
+    "mustache": "*",
     "mongoose": "*",
     "moment": "*",
     "moment-range": "*",
