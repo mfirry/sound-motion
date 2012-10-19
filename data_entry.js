@@ -22,7 +22,7 @@ exports.movies = new Array({
         "dates": [new Date(Date.parse("2012-10-16T15:20")), new Date(Date.parse("2012-10-16T17:40")), new Date(Date.parse("2012-10-16T20:00")), new Date(Date.parse("2012-10-16T22:00"))]
     }, {
         "venue": "mexico",
-        "dates": [new Date(Date.parse("2012-10-18T13:00")), new Date(Date.parse("2012-10-11T15:20")), new Date(Date.parse("2012-10-11T17:40")), new Date(Date.parse("2012-10-11T20:00")), new Date(Date.parse("2012-10-11T22:00"))]
+        "dates": [new Date(Date.parse("2012-10-18T13:00")), new Date(Date.parse("2012-10-18T15:20")), new Date(Date.parse("2012-10-18T17:40")), new Date(Date.parse("2012-10-18T20:00")), new Date(Date.parse("2012-10-18T22:00"))]
     }]
 }, {
     "title": "PROMETHEUS",
