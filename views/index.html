@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Sound Motion *BETA</title>
+		<!-- Bootstrap -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container-fluid">
+            <div class="page-header">
+    			<h1>Sound Motion</h1>
+            </div>
+            {{#movies}}
+			<div class="row-fluid past">
+				<div class="span12 well">
+                    <span class="{{class}}">{{week}}</span>
+					<h1>{{title}}</h1>
+					{{#screenings}}
+                    <div class="span3">
+                        <p class="text-info">{{venue}} - {{#the_date}}{{dates.0}}{{/the_date}}</p>
+                        <p class="times">
+						{{#dates}}
+							{{#the_time}}{{.}}{{/the_time}}
+						{{/dates}}
+                        </p>
+                    </div>
+					{{/screenings}}
+    				<div class="span12"><p>{{description}}</p></div>
+				</div>
+			</div>
+            {{/movies}}
+			<br/><br/>
+			<div class="row-fluid footer">
+				<div class="span12">
+					<p>Sound &amp; Motion is brought to you by ...</p>
+				</div>
+			</div>			
+		</div>
+	</body>
+</html>

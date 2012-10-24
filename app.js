@@ -17,8 +17,8 @@ var app = express();
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
-	app.set('view engine', 'hjs');
-    app.engine('.hjs', cons.mustache);
+	app.set('view engine', 'html');
+    app.engine('.html', cons.mustache);
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
@@ -29,6 +29,10 @@ app.configure(function(){
 
 app.configure('development', function(){
 	app.use(express.errorHandler());
+});
+
+app.get('/test', function(req, res){
+    res.render('test');
 });
 
 app.get('/', function(req, res){
@@ -46,24 +50,39 @@ app.get('/', function(req, res){
 	var Movie = db.model('Movie',movie);
 	var Screening = db.model('Screening', screening)
 
-	// console.log(moment(new Date()));
- //    console.log(moment(new Date()).day(0));
-	// console.log(moment(new Date()).day(14));
+    // console.log(moment(new Date()));
+    // console.log(moment(new Date()).day(0));
+    // console.log(moment(new Date()).day(14));
 
-	var lastSunday = moment(new Date()).day(0).toDate();
+	var lastSunday = moment(new Date()).day(-7).toDate();
 	var nextSunday = moment(new Date()).day(14).toDate();
 
     Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
         console.log(movies[0].screenings[0].dates[0]);
         // db.disconnect();
+        
+        // FIXME
+        movies[0].class = "label";
+        movies[0].week  = "Last week";
+        movies[1].class = "label label-success";
+        movies[1].week  = "This week";
+        movies[2].class = "label label-info";
+        movies[2].week  = "Next week";
+
         res.render('index', {
             movies: movies,
-            giveitatry: function() {
+            the_date: function() {
                 return function(text, render) {
                     var date = moment(new Date(render(text)));
-                    return date.format("MMMM Do YY");
+                    return date.format("MMMM, D YYYY").replace(/ /g,'&nbsp;');
                 }
-            }
+            },
+            the_time: function() {
+                return function(text, render) {
+                    var date = moment(new Date(render(text)));
+                    return date.format("HH.mm");
+                }
+            }            
         });
     });
     
