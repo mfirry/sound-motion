@@ -9,18 +9,21 @@
 	</head>
 	<body>
 		<div class="container-fluid">
-			{{#movies}}
+			<!-- {{#movies}} -->
 			<div class="row-fluid past">
 				<div class="span12">
-					<h1>{{title}}</h1>
-					{{#screenings}}
-					<div class="span3">{{#pippo}} ciao {{/pippo}}
-					</div>
-					{{/screenings}}
+					{{#movies}}
+						<h1>{{title}}</h1>
+						{{#screenings}}
+							{{#dates}}
+								<div class="span3">{{#giveitatry}}{{.}}{{/giveitatry}}</div>
+							{{/dates}}
+						{{/screenings}}
+					{{/movies}}
 				</div>
 				<div class="span12">{{description}}</div>
 			</div>
-			{{/movies}}
+			<!-- {{/movies}} -->
 			<br/><br/>
 			<div class="row-fluid footer">
 				<div class="span12">

@@ -54,14 +54,15 @@ app.get('/', function(req, res){
 	var nextSunday = moment(new Date()).day(14).toDate();
 
     Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
-        console.log(movies);
+        console.log(movies[0].screenings[0].dates[0]);
         // db.disconnect();
         res.render('index', {
             movies: movies,
-            pippo: function(a) {
-                console.log("LA LAMBDA");
-                console.log(a);
-                return moment(a).format("MMM Do YY")
+            giveitatry: function() {
+                return function(text, render) {
+                    var date = moment(new Date(render(text)));
+                    return date.format("MMMM Do YY");
+                }
             }
         });
     });
