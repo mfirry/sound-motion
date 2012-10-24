@@ -59,7 +59,7 @@ app.get('/', function(req, res){
 
     Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
         console.log(movies[0].screenings[0].dates[0]);
-        // db.disconnect();
+        db.disconnect();
         
         // FIXME
         movies[0].class = "label";
