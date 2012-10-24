@@ -80,7 +80,7 @@ app.get('/', function(req, res){
             the_time: function() {
                 return function(text, render) {
                     var date = moment(new Date(render(text)));
-                    return date.format("HH.mm");
+                    return date.format("HH:mm");
                 }
             }            
         });
