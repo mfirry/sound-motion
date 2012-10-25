@@ -58,9 +58,14 @@ app.get('/', function(req, res){
 
     Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
         console.log(movies[0].screenings[0].dates[0]);
-        db.disconnect();
-        
-        // FIXME
+        try {
+          // heroku apparently needs to disconnect after each query
+          db.disconnect();
+        } catch (e) {
+          // ...but Object #<NativeConnection> has no method 'disconnect'
+        }
+
+        // FIXME: this is way too lame
         movies[0].class = "label";
         movies[0].week  = "Last week";
         movies[1].class = "label label-success";
