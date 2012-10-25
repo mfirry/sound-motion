@@ -119,7 +119,11 @@ app.get('/create', function(req, res) {
     var Screening = db.model('Screening', screening)
     var de = require('./data_entry');
 
-    for (k in de.movies) {
+    // Empty the mongodb collection
+    Movie.remove({}, function(){
+      console.log("== REMOVED ALL MOVIES ==")
+      // Fill it with the objects from the data_entry file
+      for (k in de.movies) {
         console.log('inserting :' + de.movies[k].title);
         new Movie(de.movies[k]).save();
     }
