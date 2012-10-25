@@ -8,7 +8,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-10-09T15:00")), new Date(Date.parse("2012-10-09T18:10")), new Date(Date.parse("2012-10-09T21:15"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-10-11T15:00")), new Date(Date.parse("2012-10-11T18:10")), new Date(Date.parse("2012-10-11T21:15"))]
     }]
 }, {
@@ -21,7 +21,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-10-16T15:20")), new Date(Date.parse("2012-10-16T17:40")), new Date(Date.parse("2012-10-16T20:00")), new Date(Date.parse("2012-10-16T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-10-18T13:00")), new Date(Date.parse("2012-10-18T15:20")), new Date(Date.parse("2012-10-18T17:40")), new Date(Date.parse("2012-10-18T20:00")), new Date(Date.parse("2012-10-18T22:00"))]
     }]
 }, {
@@ -34,7 +34,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-10-23T15:20")), new Date(Date.parse("2012-10-23T17:40")), new Date(Date.parse("2012-10-23T20:00")), new Date(Date.parse("2012-10-23T22:15"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-10-25T13:00")), new Date(Date.parse("2012-10-25T15:20")), new Date(Date.parse("2012-10-25T17:40")), new Date(Date.parse("2012-10-25T20:00")), new Date(Date.parse("2012-10-25T22:15"))]
     }]
 }, {
@@ -57,7 +57,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-11-06T15:20")), new Date(Date.parse("2012-11-06T17:40")), new Date(Date.parse("2012-11-06T20:00")), new Date(Date.parse("2012-11-06T22:15"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-11-08T13:00")), new Date(Date.parse("2012-11-08T15:20")), new Date(Date.parse("2012-11-08T17:40")), new Date(Date.parse("2012-11-08T20:00")), new Date(Date.parse("2012-11-08T22:00"))]
     }]    
 }, {
@@ -70,7 +70,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-11-13T15:40")), new Date(Date.parse("2012-11-13T18:30")), new Date(Date.parse("2012-11-13T21:15"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-11-15T13:00")), new Date(Date.parse("2012-11-15T15:40")), new Date(Date.parse("2012-11-15T18:30")), new Date(Date.parse("2012-11-15T21:15"))]
     }]    
 }, {
@@ -83,7 +83,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-11-20T12:30")), new Date(Date.parse("2012-11-20T15:00")), new Date(Date.parse("2012-11-20T17:30")), new Date(Date.parse("2012-11-20T20:00")), new Date(Date.parse("2012-11-20T22:30"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-11-22T12:30")), new Date(Date.parse("2012-11-22T15:00")), new Date(Date.parse("2012-11-22T17:30")), new Date(Date.parse("2012-11-22T20:00")), new Date(Date.parse("2012-11-22T22:30"))]
     }]    
 }, {
@@ -96,7 +96,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-11-27T15:20")), new Date(Date.parse("2012-11-27T17:40")), new Date(Date.parse("2012-11-27T20:00")), new Date(Date.parse("2012-11-27T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-11-29T13:00")), new Date(Date.parse("2012-11-29T15:20")), new Date(Date.parse("2012-11-29T17:40")), new Date(Date.parse("2012-11-29T20:00")), new Date(Date.parse("2012-11-29T22:00"))]
     }]    
 }, {
@@ -109,7 +109,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-12-04T15:20")), new Date(Date.parse("2012-12-04T17:40")), new Date(Date.parse("2012-12-04T20:00")), new Date(Date.parse("2012-12-04T22:15"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-12-06T13:00")), new Date(Date.parse("2012-12-06T15:20")), new Date(Date.parse("2012-12-06T17:40")), new Date(Date.parse("2012-12-06T20:00")), new Date(Date.parse("2012-12-06T22:15"))]
     }]    
 }, {
@@ -122,7 +122,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2012-12-11T15:20")), new Date(Date.parse("2012-12-11T17:40")), new Date(Date.parse("2012-12-11T20:00")), new Date(Date.parse("2012-12-11T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2012-12-13T13:00")), new Date(Date.parse("2012-12-13T15:20")), new Date(Date.parse("2012-12-13T17:40")), new Date(Date.parse("2012-12-13T20:00")), new Date(Date.parse("2012-12-13T22:00"))]
     }]    
 }, {
@@ -135,7 +135,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2013-01-08T15:20")), new Date(Date.parse("2013-01-08T17:40")), new Date(Date.parse("2013-01-08T20:00")), new Date(Date.parse("2013-01-08T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2013-01-10T13:00")), new Date(Date.parse("2013-01-10T15:20")), new Date(Date.parse("2013-01-10T17:40")), new Date(Date.parse("2013-01-10T20:00")), new Date(Date.parse("2013-01-10T22:00"))]
     }]    
 }, {
@@ -148,7 +148,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2013-01-15T15:20")), new Date(Date.parse("2013-01-15T17:40")), new Date(Date.parse("2013-01-15T20:00")), new Date(Date.parse("2013-01-15T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2013-01-17T13:00")), new Date(Date.parse("2013-01-17T15:20")), new Date(Date.parse("2013-01-17T17:40")), new Date(Date.parse("2013-01-17T20:00")), new Date(Date.parse("2013-01-17T22:00"))]
     }]    
 }, {
@@ -161,7 +161,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2013-01-22T15:00")), new Date(Date.parse("2013-01-22T18:10")), new Date(Date.parse("2013-01-22T21:15"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2013-01-24T15:00")), new Date(Date.parse("2013-01-24T18:10")), new Date(Date.parse("2013-01-24T21:15"))]
     }]    
 }, {
@@ -174,7 +174,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2013-01-29T15:20")), new Date(Date.parse("2013-01-29T17:40")), new Date(Date.parse("2013-01-29T20:00")), new Date(Date.parse("2013-01-29T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2013-01-31T13:00")), new Date(Date.parse("2013-01-31T15:20")), new Date(Date.parse("2013-01-31T17:40")), new Date(Date.parse("2013-01-31T20:00")), new Date(Date.parse("2013-01-31T22:00"))]
     }]    
 }, {
@@ -187,7 +187,7 @@ exports.movies = new Array({
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2013-02-05T15:20")), new Date(Date.parse("2013-02-05T17:40")), new Date(Date.parse("2013-02-05T20:00")), new Date(Date.parse("2013-02-05T22:00"))]
     }, {
-        "venue": "mexico",
+        "venue": "Mexico",
         "dates": [new Date(Date.parse("2013-02-07T13:00")), new Date(Date.parse("2013-02-07T15:20")), new Date(Date.parse("2013-02-07T17:40")), new Date(Date.parse("2013-02-07T20:00")), new Date(Date.parse("2013-02-07T22:00"))]
     }]    
 });
