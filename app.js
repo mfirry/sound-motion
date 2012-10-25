@@ -6,7 +6,6 @@
 var moment = require('moment');
 
 var express = require('express')
-  , routes = require('./routes')
   , http = require('http')
   , path = require('path')
   , cons = require('consolidate')
