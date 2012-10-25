@@ -6,11 +6,16 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.0.0rc1",
-    "jade": "*",
-    "pg": "0.8.3",
-	"async": "0.1.22",
-	"date-utils": "1.2.11"
+    "express": "3.0.0rc4",
+    "hjs": "*",
+    "consolidate": "*",
+    "mustache": "*",
+    "mongoose": "*",
+    "moment": "*",
+    "moment-range": "*",
+    "mongodb": "*",
+    "async": "0.1.22",
+    "date-utils": "1.2.11"
   },
   "engines": {
     "node": "0.8.6",
