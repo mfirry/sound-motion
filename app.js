@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -14,56 +13,57 @@ var express = require('express')
 var app = express();
 
 app.configure(function(){
-	app.set('port', process.env.PORT || 3000);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'html');
+  app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'html');
     app.engine('.html', cons.mustache);
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(app.router);
-	app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
-	app.use(express.errorHandler());
+  app.use(express.errorHandler());
 });
+
+// DB connection: connect here, use it everywhere
+var mongoose = require('mongoose');
+try {
+  db = mongoose.connect(process.env.MONGOHQ_URL);
+} catch(e) {
+  db = mongoose.createConnection('localhost', 'local');
+}
 
 app.get('/test', function(req, res){
     res.render('test');
 });
 
 app.get('/', function(req, res){
-    //console.log('db_url: '+process.env.MONGOHQ_URL);
-	var mongoose = require('mongoose');
-    try {
-        db = mongoose.connect(process.env.MONGOHQ_URL);
-    } catch(e) {
-        db = mongoose.createConnection('localhost', 'local');
-    }
 
-	var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
-	var screening = new mongoose.Schema ({venue: String, dates: [Date]});
+  var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
+  var screening = new mongoose.Schema ({venue: String, dates: [Date]});
 
-	var Movie = db.model('Movie',movie);
-	var Screening = db.model('Screening', screening)
+  var Movie = db.model('Movie',movie);
+  var Screening = db.model('Screening', screening)
 
     // console.log(moment(new Date()));
     // console.log(moment(new Date()).day(0));
     // console.log(moment(new Date()).day(14));
 
-	var lastSunday = moment(new Date()).day(-7).toDate();
-	var nextSunday = moment(new Date()).day(14).toDate();
+  var lastSunday = moment(new Date()).day(-7).toDate();
+  var nextSunday = moment(new Date()).day(14).toDate();
 
     Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
         console.log(movies[0].screenings[0].dates[0]);
-        try {
-          // heroku apparently needs to disconnect after each query
-          db.disconnect();
-        } catch (e) {
-          // ...but Object #<NativeConnection> has no method 'disconnect'
-        }
+        // try {
+        //   // heroku apparently needs to disconnect after each query
+        //   db.disconnect();
+        // } catch (e) {
+        //   // ...but Object #<NativeConnection> has no method 'disconnect'
+        // }
 
         // FIXME: this is way too lame
         movies[0].class = "label";
@@ -97,14 +97,6 @@ app.get('/', function(req, res){
 });
 
 app.get('/create', function(req, res) {
-    var mongoose = require('mongoose');
-    try {
-        db = mongoose.connect(process.env.MONGOHQ_URL);
-        console.log('db_url: '+process.env.MONGOHQ_URL);
-    } catch (e) {
-        db = mongoose.createConnection('localhost', 'local');
-    }
-
     var movie = new mongoose.Schema({
         title: String,
         description: String,
@@ -126,9 +118,9 @@ app.get('/create', function(req, res) {
       for (k in de.movies) {
         console.log('inserting :' + de.movies[k].title);
         new Movie(de.movies[k]).save();
-    }
-    // db.disconnect();
-    res.send("ok");
+      }
+      res.send("ok");
+    });
 });
 
 app.listen(app.get('port') || 3000, function() {
