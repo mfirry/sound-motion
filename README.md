@@ -6,13 +6,8 @@ Deployed with Heroku at:
 http://soundmotion.it/
 
 # TODO
-* disable create route
-* add social crap (fb-like per movie and tweet like 'this week @soundandmotionmilano #prometheus')
-** add og tags for better fb sharing
-* add route /all to see complete list
 * add link to google maps position for venues (see down list)
-* add link to imdb
-** add poster from imdb (https://github.com/worr/node-imdb-api)
+* add link to imdb (https://github.com/worr/node-imdb-api)
 
 #MAYBES
 * LOGO
