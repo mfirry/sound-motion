@@ -117,16 +117,14 @@ app.get('/create', function(req, res) {
 });
 
 app.get('/all', function(req, res){
-
   var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
   var screening = new mongoose.Schema ({venue: String, dates: [Date]});
 
   var Movie = db.model('Movie',movie);
   var Screening = db.model('Screening', screening)
-
-  var lastSunday = moment(new Date()).day(-7).toDate();
-  var nextSunday = moment(new Date()).day(14).toDate();
-
+  
+  //var lastSunday = moment(new Date()).day(-7).toDate();
+  
   Movie.find(function(err, movies){
     res.render('all', {
       movies: movies,
