@@ -126,7 +126,7 @@ app.get('/all', function(req, res){
   //var lastSunday = moment(new Date()).day(-7).toDate();
   
   Movie.find(function(err, movies){
-    res.render('all', {
+    res.render('index', {
       movies: movies,
       the_date: function() {
         return function(text, render) {
