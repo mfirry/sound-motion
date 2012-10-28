@@ -7,14 +7,17 @@ http://soundmotion.it/
 
 # TODO
 * disable create route
-* add social crap
-* add og tags for fb sharing
+* add social crap (fb-like per movie and tweet like 'this week @soundandmotionmilano #prometheus')
+** add og tags for better fb sharing
 * add route /all to see complete list
 * add link to google maps position for venues (see down list)
 * add link to imdb
-* add poster from imdb (https://github.com/worr/node-imdb-api)
-* maybe @text-decoration: line-through;@ to last week movie title
-* maybe bigger font for this week's movie (or maybe bigger font to
+** add poster from imdb (https://github.com/worr/node-imdb-api)
+
+#MAYBES
+* LOGO
+* @text-decoration: line-through;@ to last week movie title
+* bigger font for this week's movie (or bigger font to
 label-success)
 * specify if movies have subs or not
 
