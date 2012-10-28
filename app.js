@@ -144,6 +144,15 @@ app.get('/all', function(req, res){
   });
 });
 
+app.get('/imdb', function(req,res){
+  var imdb = require('imdb-api');
+  var movie;
+  imdb.getById('1446714', function(err, things) {
+      movie = things;
+      console.log(movie);
+      res.send(movie);
+  });
+});
 
 app.listen(app.get('port') || process.env.PORT || 3000, function() {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
