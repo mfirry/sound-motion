@@ -127,6 +127,7 @@ app.get('/all', function(req, res){
   
   Movie.find(function(err, movies){
     res.render('index', {
+      show_all: 'none',
       movies: movies,
       the_date: function() {
         return function(text, render) {
