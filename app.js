@@ -36,26 +36,27 @@ if (process.argv[2]) {
   var db = mongoose.connect('mongodb://localhost/local');
 }
 
+// DB Schema
+var movie = new mongoose.Schema({ title: String, imdb: String, omdb: Object, description: String, screenings: [screening] });
+var screening = new mongoose.Schema ({venue: String, dates: [Date]});
+var Movie = db.model('Movie', movie);
+var Screening = db.model('Screening', screening)
+
 app.get('/test', function(req, res){
   res.render('index');
 });
 
 app.get('/', function(req, res){
 
-  var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
-  var screening = new mongoose.Schema ({venue: String, dates: [Date]});
-
-  var Movie = db.model('Movie',movie);
-  var Screening = db.model('Screening', screening)
-
-  // console.log(moment(new Date()));
-  // console.log(moment(new Date()).day(0));
-  // console.log(moment(new Date()).day(14));
-
   var lastSunday = moment(new Date()).day(-7).toDate();
   var nextSunday = moment(new Date()).day(14).toDate();
 
-  Movie.find({"screenings.dates":{$gte:lastSunday, $lte:nextSunday}}, function(err, movies){
+  var query = Movie.where("screenings.dates").gte(lastSunday).lte(nextSunday);
+  query.sort({"screenings.dates": 1});
+  
+  query.exec(function(err, movies){
+    console.log(err);
+    console.log(movies);
     console.log(movies[0].screenings[0].dates[0]);
 
     // FIXME: this is way too lame
@@ -83,25 +84,9 @@ app.get('/', function(req, res){
     });
   });
     
-  // Movie.find({}, function(err, screenings){
-  //     console.log(screenings);
-  //     res.send(screenings);
-  // });
 });
 
 app.get('/create', function(req, res) {
-    var movie = new mongoose.Schema({
-        title: String,
-        description: String,
-        screenings: [screening]
-    });
-    var screening = new mongoose.Schema({
-        venue: String,
-        dates: [Date]
-    });
-
-    var Movie = db.model('Movie', movie);
-    var Screening = db.model('Screening', screening)
     var de = require('./data_entry');
 
     // Empty the mongodb collection
@@ -117,15 +102,11 @@ app.get('/create', function(req, res) {
 });
 
 app.get('/all', function(req, res){
-  var movie = new mongoose.Schema({ title: String, description: String, screenings: [screening] });
-  var screening = new mongoose.Schema ({venue: String, dates: [Date]});
-
-  var Movie = db.model('Movie',movie);
-  var Screening = db.model('Screening', screening)
   
-  //var lastSunday = moment(new Date()).day(-7).toDate();
-  
-  Movie.find(function(err, movies){
+  var query = Movie.find();
+  query.sort({"screenings.dates": 1});
+    
+  query.exec(function(err, movies){
     res.render('index', {
       show_all: 'none',
       movies: movies,
@@ -146,13 +127,33 @@ app.get('/all', function(req, res){
 });
 
 app.get('/imdb', function(req,res){
-  var imdb = require('imdb-api');
-  var movie;
-  imdb.getById('1446714', function(err, things) {
-      movie = things;
-      console.log(movie);
-      res.send(movie);
+
+  var rest = require('restler');
+  var _ = require('underscore');
+
+  Movie.find(function(err, movies) {
+    _.each(movies, function(movie) {
+      if (movie.imdb) {
+        console.log(movie.imdb)
+        var query = {
+          i: movie.imdb
+        }
+      } else {
+        var query = {
+          t: movie.title
+        }
+      }
+      rest.get('http://www.omdbapi.com/', {
+        query: query,
+        parser: rest.parsers.json
+      })
+        .on('complete', function(data) {
+        movie.omdb = data
+        movie.save();
+      });
+    });
   });
+  res.send("ok");
 });
 
 app.listen(app.get('port') || process.env.PORT || 3000, function() {

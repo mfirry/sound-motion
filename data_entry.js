@@ -39,6 +39,7 @@ exports.movies = new Array({
     }]
 }, {
     "title": "THE WORDS",
+    "imdb": "tt1840417",
     "description": "In The Words, an aspiring writer claims another man’s long lost work as his own only to find there are steep consequences when ambition is valued above life’s most fundamental, impassioned three words.",
     "screenings": [{
         "venue": "Anteo",
@@ -88,6 +89,7 @@ exports.movies = new Array({
     }]    
 }, {
     "title": "KILLING THEM SOFTLY",
+    "imdb": "tt1764234",
     "description": "Adapted from George V. Higgins novel and set in New Orleans, Killing Them Softly follows professional enforcer, Jackie Cogan (Pitt), who investigates a heist that occurs during a high stakes, mob-protected, poker game.",
     "screenings": [{
         "venue": "Anteo",
@@ -101,6 +103,7 @@ exports.movies = new Array({
     }]    
 }, {
     "title": "ARGO",
+    "imdb": "tt1024648",
     "description": "Based on true events, Argo chronicles the life-or-death covert operation to rescue six Americans, which unfolded behind the scenes of the Iran hostage crisis--the truth of which was unknown by the public for decades. On November 4, 1979, as the Iranian revolution reaches its boiling point, militants storm the U.S. embassy in Tehran, taking 52 Americans hostage.",
     "screenings": [{
         "venue": "Anteo",
@@ -166,6 +169,7 @@ exports.movies = new Array({
     }]    
 }, {
     "title": "LOVE IS ALL YOU NEED",
+    "imdb": "tt1854236",
     "description": "Love is all you need is a romantic comedy by Oscar winner Susanne Bier written by Susanne Bier and Anders Thomas Jensen, starring Pierce Brosnan and Trine Dyrholm. The film is a warm, funny and life-affirming story about how, just when you think its all over, it just might be about to begin.",
     "screenings": [{
         "venue": "Anteo",
@@ -178,7 +182,7 @@ exports.movies = new Array({
         "dates": [new Date(Date.parse("2013-01-31T13:00")), new Date(Date.parse("2013-01-31T15:20")), new Date(Date.parse("2013-01-31T17:40")), new Date(Date.parse("2013-01-31T20:00")), new Date(Date.parse("2013-01-31T22:00"))]
     }]    
 }, {
-    "title": "THE ANGEL'S SHARE",
+    "title": "THE ANGELS' SHARE",
     "description": "Narrowly avoiding jail, new dad Robbie vows to turn over a new leaf. A visit to a whisky distillery inspires him and his mates to seek a way out of their hopeless lives.",
     "screenings": [{
         "venue": "Anteo",

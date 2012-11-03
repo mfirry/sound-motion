@@ -44,21 +44,26 @@
 
             </div>
             {{#movies}}
-            <div class="row-fluid past">
-                <div class="span12 well">
+            <div class="row-fluid">
+                <div class="media">
+                    <a class="pull-left"><img class="media-object" src="{{omdb.Poster}}" alt="poster"></a>
                     <span class="{{class}}">{{week}}</span>
-                    <h2>{{title}}</h2>
-                    {{#screenings}}
-                    <div class="span3">
-                        <p class="text-info">{{venue}} - {{#the_date}}{{dates.0}}{{/the_date}}</p>
-                        <p class="times">
-                        {{#dates}}
-                            {{#the_time}}{{.}}{{/the_time}}
-                        {{/dates}}
-                        </p>
+
+                    <div class="media-body">
+                        <h4 class="media-heading">{{title}}</h4>
+                        
+                        {{#screenings}}
+                        <div class="span3">
+                            <p class="text-info">{{venue}} - {{#the_date}}{{dates.0}}{{/the_date}}</p>
+                            <p class="times">
+                            {{#dates}}
+                                {{#the_time}}{{.}}{{/the_time}}
+                            {{/dates}}
+                            </p>
+                        </div>
+                        {{/screenings}}
                     </div>
-                    {{/screenings}}
-                    <div class="span9"><p>{{description}}</p></div>
+                    <div class="span6"><p>{{description}}</p></div>
                 </div>
             </div>
             {{/movies}}
