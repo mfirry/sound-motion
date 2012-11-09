@@ -156,6 +156,18 @@ app.get('/imdb', function(req,res){
   res.send("ok");
 });
 
+app.get('/anteo', function(req,res){
+  res.render('anteo');
+});
+
+app.get('/mexico', function(req,res){
+  res.render('mexico');
+});
+
+app.get('/arcobaleno', function(req,res){
+  res.render('arcobaleno');
+});
+
 app.listen(app.get('port') || process.env.PORT || 3000, function() {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
