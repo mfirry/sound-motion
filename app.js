@@ -165,6 +165,7 @@ app.get('/imdb', function(req,res){
         data.Poster=tmp[1];
         // console.log(tmp[1]);
         movie.omdb = data
+        movie.omdb.Poster=tmp[1];
         movie.save();
       });
     });
