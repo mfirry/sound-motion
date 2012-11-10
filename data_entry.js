@@ -64,6 +64,7 @@ exports.movies = new Array({
 }, {
     "title": "ON THE ROAD",
     "description": "Adaptation of Jack Kerouac's On the Road, which chronicles Kerouac's years traveling the North American continent with his friend Neal Cassady, a sideburned hero of the snowy West. As Sal Paradise and Dean Moriarty, the two roam the country in a quest for self-knowledge and experience.",
+    "imdb": "tt0337692",
     "screenings": [{
         "venue": "Anteo",
         "dates": [new Date(Date.parse("2012-11-12T13:00")), new Date(Date.parse("2012-11-12T15:40")), new Date(Date.parse("2012-11-12T18:30")), new Date(Date.parse("2012-11-12T21:15"))]
