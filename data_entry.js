@@ -78,6 +78,7 @@ exports.movies = new Array({
 }, {
     "title": "SAVAGES",
     "description": "Laguna Beach entrepreneurs Ben (Johnson), a peaceful and charitable marijuana producer, and his closest friend Chon (Kitsch), a former Navy SEAL and ex-mercenary, run a lucrative, homegrown industry-raising some of the best weed ever developed.",
+    "imdb": "tt1615065",
     "screenings": [{
         "venue": "Anteo",
         "dates": [new Date(Date.parse("2012-11-19T12:30")), new Date(Date.parse("2012-11-19T15:00")), new Date(Date.parse("2012-11-19T17:30")), new Date(Date.parse("2012-11-19T20:00")), new Date(Date.parse("2012-11-19T22:30"))]

@@ -149,19 +149,21 @@ app.get('/imdb', function(req,res){
       })
         .on('complete', function(data) {
         var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
-// var util = require('util'),
-//     exec = require('child_process').exec,
-//     child,
-//     url = data.Poster;
-
-// child = exec('wget ' + url,
-//   function (error, stdout, stderr) {
-//     console.log('stdout: ' + stdout);
-//     console.log('stderr: ' + stderr);
-//     if (error !== null) {
-//       console.log('exec error: ' + error);
-//     }
-// });  
+        // if(movie.title=='SAVAGES') {
+        //   var util = require('util'),
+        //       exec = require('child_process').exec,
+        //       child,
+        //       url = data.Poster;
+        // 
+        //   child = exec('wget ' + url,
+        //     function (error, stdout, stderr) {
+        //       console.log('stdout: ' + stdout);
+        //       console.log('stderr: ' + stderr);
+        //       if (error !== null) {
+        //         console.log('exec error: ' + error);
+        //       }
+        //   });  
+        // }
         data.Poster=tmp[1];
         // console.log(tmp[1]);
         movie.omdb = data
