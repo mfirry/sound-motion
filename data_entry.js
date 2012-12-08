@@ -119,6 +119,7 @@ exports.movies = new Array({
     }]    
 }, {
     "title": "HOPE SPRINGS",
+    "imdb" : "tt1535438",
     "description": "Kay and Arnold are a devoted couple, but decades of marriage have left Kay wanting to spice things up and reconnect with her husband. When she hears of a renowned couple's specialist in the small town of Great Hope Springs, she attempts to persuade her skeptical husband, a steadfast man of routine, to get on a plane for a week of marriage therapy.",
     "screenings": [{
         "venue": "Anteo",
