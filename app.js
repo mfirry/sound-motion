@@ -62,8 +62,10 @@ app.get('/', function(req, res){
     // FIXME: this is way too lame
     // movies[0].class = "label";
     // movies[0].week  = "Last week";
-    movies[0].class = "label label-success";
-    movies[0].week  = "This week";
+    if(movies[0]) {
+      movies[0].class = "label label-success";
+      movies[0].week  = "This week";
+    }
     if(movies[1]) {
       movies[1].class = "label label-info";
       movies[1].week  = "Next week";
