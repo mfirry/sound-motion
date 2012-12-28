@@ -82,6 +82,9 @@
 
 @media (max-width: 767px) {
 
+.descrizione {
+	margin-top: 33px;
+}
 
 
 h1 a {
