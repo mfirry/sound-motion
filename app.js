@@ -4,7 +4,8 @@
 var express = require('express')
   , path    = require('path')
   , cons    = require('consolidate')
-  , moment  = require('moment');
+  , moment  = require('moment')
+  , _       = require('underscore');
   
 var app = express();
 
@@ -42,6 +43,37 @@ var screening = new mongoose.Schema ({venue: String, dates: [Date]});
 var Movie = db.model('Movie', movie);
 var Screening = db.model('Screening', screening)
 
+var render = function(res, movies){
+  console.log("rendering");
+  res.render('index', {
+    movies: movies,
+    date_month: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("MMMM");
+      }
+    },
+    date_day: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("D");
+      }
+    },
+    time_hour: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("HH");
+      }
+    },
+    time_mins: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("mm");
+      }
+    }
+  });
+};
+
 app.get('/test', function(req, res){
   res.render('index');
 });
@@ -59,6 +91,12 @@ app.get('/', function(req, res){
     // console.log(movies);
     // console.log(movies[0].screenings[0].dates[0]);
 
+  _.each(movies, function(m){
+    _.each(m.screenings, function(s){
+      //console.log(s);
+      });
+    });
+    
     // FIXME: this is way too lame
     // movies[0].class = "label";
     // movies[0].week  = "Last week";
@@ -70,22 +108,9 @@ app.get('/', function(req, res){
       movies[1].class = "label label-info";
       movies[1].week  = "Next week";
     }
+    
+    render(res, movies);
 
-    res.render('index', {
-      movies: movies,
-      the_date: function() {
-        return function(text, render) {
-          var date = moment(new Date(render(text)));
-          return date.format("MMMM, D YYYY").replace(/ /g,'&nbsp;');
-        }
-      },
-      the_time: function() {
-        return function(text, render) {
-          var date = moment(new Date(render(text)));
-          return date.format("HH:mm");
-        }
-      }
-    });
   });
     
 });
@@ -111,29 +136,13 @@ app.get('/all', function(req, res){
   query.sort({"screenings.dates": 1});
     
   query.exec(function(err, movies){
-    res.render('index', {
-      show_all: 'none',
-      movies: movies,
-      the_date: function() {
-        return function(text, render) {
-          var date = moment(new Date(render(text)));
-          return date.format("MMMM, D YYYY").replace(/ /g,'&nbsp;');
-        }
-      },
-      the_time: function() {
-        return function(text, render) {
-          var date = moment(new Date(render(text)));
-          return date.format("HH:mm");
-        }
-      }
-    });
+    render(res, movies);
   });
 });
 
 app.get('/imdb', function(req,res){
 
   var rest = require('restler');
-  var _ = require('underscore');
 
   Movie.find(function(err, movies) {
     _.each(movies, function(movie) {

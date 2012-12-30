@@ -53,6 +53,10 @@ body{
 	color: white;
 	font-weight: bold;
 }
+.orario span {
+  font-size: 12px;
+  font-weight: normal;
+}
 .giorno {
 	font-size: 40px;
 	color: white;

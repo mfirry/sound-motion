@@ -36,79 +36,73 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
         <div class="container">
-            <div class="page-header">
-			
-				<div id="social">
-					<div style="vertical-align: top" class="fb-like" data-href="http://www.facebook.com/soundandmotionmilano" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div>
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://soundmotion.it" data-text="English language movies in Milano">Tweet</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				</div>
-				
-                <h1><a href="#"><span style="font-weight:normal !important;">sound&amp;</span>motion</a></h1>
-                <p class="sottotitolo">english language movies in Milano</p>
-
+          <div class="page-header">
+            <div id="social">
+              <div style="vertical-align: top" class="fb-like" data-href="http://www.facebook.com/soundandmotionmilano" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div>
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://soundmotion.it" data-text="English language movies in Milano">Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            {{^movies}}
+            <h1><a href="#"><span style="font-weight:normal !important;">sound&amp;</span>motion</a></h1>
+            <p class="sottotitolo">english language movies in Milano</p>
+          </div>
+          
+          {{^movies}}
             <div><p><span class="label label-important">There are no screenings this week :(</span></p></div>
-            {{/movies}}
-            {{#movies}}
+          {{/movies}}
+          {{#movies}}
             <div class="cornice">
-                <div class="">
-                    <span class="{{class}}">{{week}}</span>
+              <div class="">
+                  <span class="{{class}}">{{week}}</span>
+              </div>
+              <div class="row-fluid">
+              
+                <div class="span3">
+                    <a><img src="img/posters/{{omdb.Poster}}" alt="poster"></a>
                 </div>
-                <div class="row-fluid">
-				
-					
-                    <div class="span3">
-                        <a><img src="img/posters/{{omdb.Poster}}" alt="poster"></a>
-                    </div>
-					
-					<div class="span9 bottom20">
-						<h4>{{title}}</h4>
-					</div>
-                    {{#screenings}}
-                    <div class="span3 boxVerde bottom20" style="height: 100px;">
-					
-						<div class="dataCinema">
-							<div class="giorno">28</div>
-							<div class="meseCinema"><span class="cinema">{{venue}}</span><br/>october</div>
-						</div>
-					
-						<div class="row">
-							<div class="orario">12<span style="font-size: 12px; font-weight: regular;">30</span></div>
-							<div class="orario">15<span style="font-size: 12px; font-weight: regular;">00</span></div>
-							<div class="orario">17<span style="font-size: 12px; font-weight: regular;">30</span></div>
-							<div class="orario">20<span style="font-size: 12px; font-weight: regular;">00</span></div>
-							<div class="orario">22<span style="font-size: 12px; font-weight: regular;">30</span></div>
-						</div>
-						
-						
-                        <!-- <p class="text-info">{{venue}} - {{#the_date}}{{dates.0}}{{/the_date}}</p>
-                        <p class="times">
-                        {{#dates}}
-                            {{#the_time}}{{.}}{{/the_time}}
-                        {{/dates}}
-                        </p> -->
-						
-						
-						
-						
-                    </div>
-                    {{/screenings}}
-                    <div class="span3"><p><span style="font-weight:bold;">Directed by:</span><br/>{{omdb.Director}}<br/><br/><span style="font-weight:bold;">Starring:</span><br/>{{omdb.Actors}}</p></div>
-                    <div class="span6 descrizione"><p>{{description}}</p></div>
+                
+                <div class="span9 bottom20">
+                <h4>{{title}}</h4>
                 </div>
+                  
+                <div class="span9">
+                  {{#screenings}}
+                  <div class="span4 boxVerde bottom20" style="height: 100px;">
+
+                    <div class="dataCinema">
+                      <div class="giorno">{{#date_day}}{{dates.0}}{{/date_day}}</div>
+                      <div class="meseCinema"><span class="cinema">{{venue}}</span><br/>
+                      {{#date_month}}{{dates.0}}{{/date_month}}
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      {{#dates}}
+                    	<div class="orario">
+                      {{#time_hour}}{{.}}{{/time_hour}}<span>{{#time_mins}}{{.}}{{/time_mins}}</span>
+                      </div>
+                      {{/dates}}
+                    </div>
+                    
+                  </div>
+                  {{/screenings}}
+                </div>
+                
+                <div class="span9">
+                  <div class="span4"><p><span style="font-weight:bold;">Directed by:</span><br/>{{omdb.Director}}<br/><br/><span style="font-weight:bold;">Starring:</span><br/>{{omdb.Actors}}</p></div>
+                  <div class="span8 descrizione"><p>{{description}}</p></div>
+                </div>
+              </div>
             </div>
-            {{/movies}}
-            <p>
-              <a class="btn" style="display:{{show_all}}" href="/all">Show all movies</a>
-            </p>
-            <div class="row-fluid footer">
-                <div class="span12" style="margin-top: 20px">
-                    <p><span style="font-weight:bold;">sound&amp;motion</span> is brought to you by <a href="https://github.com/smallcapitals">smallcapitals</a>.
-                        Source code and issues on <a href="https://github.com/smallcapitals/sound-motion">github</a>.</p>
-                </div>
-            </div>            
+          {{/movies}}
+          <p>
+            <a class="btn" style="display:{{show_all}}" href="/all">Show all movies</a>
+          </p>
+          <div class="row-fluid footer">
+            <div class="span12" style="margin-top: 20px">
+              <p><span style="font-weight:bold;">sound&amp;motion</span> is brought to you by <a href="https://github.com/smallcapitals">smallcapitals</a>.
+                Source code and issues on <a href="https://github.com/smallcapitals/sound-motion">github</a>.</p>
+            </div>
+          </div>            
         </div>
     </body>
 </html>
