@@ -51,8 +51,12 @@
           {{/movies}}
           {{#movies}}
             <div class="cornice">
-              <div class="">
-                  <span class="{{class}}">{{week}}</span>
+              <div class="contAlert">
+				  <span class="thisWeek">this week</span>
+				  <!-- <span class="today">today</span>  -->
+				  
+				  
+                  <!-- <span class="{{class}}">{{week}}</span> -->
               </div>
               <div class="row-fluid">
               
@@ -95,7 +99,7 @@
             </div>
           {{/movies}}
           <p>
-            <a class="btn" style="display:{{show_all}}" href="/all">Show all movies</a>
+            <a class="pulsGenerico" style="display:{{show_all}}" href="/all">show all movies</a>
           </p>
           <div class="row-fluid footer">
             <div class="span12" style="margin-top: 20px">

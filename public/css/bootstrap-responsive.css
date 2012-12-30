@@ -472,6 +472,18 @@ h1 a {
 
 @media (min-width: 768px) and (max-width: 979px) {
 
+.contAlert {
+	width: 157px;
+}
+
+.thisWeek {
+	zoom: 0.8;
+}
+.today {
+	zoom: 0.8;
+}
+
+
 
   .row {
     /* margin-left: -20px; */
@@ -812,6 +824,13 @@ h1 a {
 
 @media (max-width: 767px) {
 
+
+.contAlert {
+	width: 300px;
+}
+
+
+
 .meseCinema {
 	margin-top: -5px;
 	margin-left: 5px;
@@ -917,6 +936,11 @@ margin: 14px 0;
 }
 
 @media (max-width: 480px) {
+
+.contAlert {
+	width: 247px;
+}
+
 
 .orario {
 margin-right: 5px;
