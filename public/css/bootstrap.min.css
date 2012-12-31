@@ -87,9 +87,12 @@ a{
 	line-height: 15px;
 }
 .cinema {
-	color: #405948;
-	text-transform:uppercase;
+	color: black;
+	text-transform: uppercase;
 	font-weight: bold;
+	zoom: 1;
+	filter: alpha(opacity=60);
+	opacity: 0.6;
 }
 
 .offset12{margin-left:980px}.offset11{margin-left:900px}.offset10{margin-left:820px}.offset9{margin-left:740px}.offset8{margin-left:660px}.offset7{margin-left:580px}.offset6{margin-left:500px}.offset5{margin-left:420px}.offset4{margin-left:340px}.offset3{margin-left:260px}.offset2{margin-left:180px}.offset1{margin-left:100px}.row-fluid{width:100%;*zoom:1}.row-fluid:before,.row-fluid:after{display:table;line-height:0;content:""}.row-fluid:after{clear:both}
@@ -152,6 +155,12 @@ h4 {
 .boxVerde {
 	background-image: url('/img/patternBoxVerde.jpg');
 	background-color: #84a58e; 
+	padding: 10px 0px 0px 8px;
+}
+
+.boxRosso {
+	background-image: url('/img/patternBoxRosso.jpg');
+	background-color: #d41333; 
 	padding: 10px 0px 0px 8px;
 }
  
