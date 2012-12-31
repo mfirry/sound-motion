@@ -44,7 +44,22 @@ var Movie = db.model('Movie', movie);
 var Screening = db.model('Screening', screening)
 
 var render = function(res, movies){
-  console.log("rendering");
+  _.each(movies, function(m){
+    _.each(m.screenings, function(s){
+      var sdate = moment(new Date(s.dates[0]));
+      if (0 === moment(sdate).day(0).startOf('day').diff(moment().day(0).startOf('day'))) {
+        m.this_week= true;
+      }
+      if (0 === moment(sdate).day(0).startOf('day').diff(moment().day(7).startOf('day'))) {
+        m.next_week = true;
+      }
+      if (0 === moment(sdate).startOf('day').diff(moment().startOf('day'))) {
+        s.today = true;
+        m.today = true;
+      }
+    });
+  });
+  
   res.render('index', {
     movies: movies,
     date_month: function() {
@@ -87,27 +102,6 @@ app.get('/', function(req, res){
   query.sort({"screenings.dates": 1});
   
   query.exec(function(err, movies){
-    // console.log(err);
-    // console.log(movies);
-    // console.log(movies[0].screenings[0].dates[0]);
-
-  _.each(movies, function(m){
-    _.each(m.screenings, function(s){
-      //console.log(s);
-      });
-    });
-    
-    // FIXME: this is way too lame
-    // movies[0].class = "label";
-    // movies[0].week  = "Last week";
-    if(movies[0]) {
-      movies[0].class = "label label-success";
-      movies[0].week  = "This week";
-    }
-    if(movies[1]) {
-      movies[1].class = "label label-info";
-      movies[1].week  = "Next week";
-    }
     
     render(res, movies);
 

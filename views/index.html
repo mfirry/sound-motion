@@ -52,11 +52,11 @@
           {{#movies}}
             <div class="cornice">
               <div class="contAlert">
-				  <span class="thisWeek">this week</span>
-				  <!-- <span class="today">today</span>  -->
-				  
-				  
-                  <!-- <span class="{{class}}">{{week}}</span> -->
+                {{#today}}<span class="today">today</span>{{/today}}
+                {{^today}}
+                  {{#this_week}}<span class="thisWeek">this week</span>{{/this_week}}
+                  {{#next_week}}<span class="thisWeek">next week</span>{{/next_week}}
+                {{/today}}
               </div>
               <div class="row-fluid">
               
