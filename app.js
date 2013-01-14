@@ -45,10 +45,12 @@ var Screening = db.model('Screening', screening)
 
 var render = function(res, movies){
   _.each(movies, function(m){
+    m.today = false;
     _.each(m.screenings, function(s){
+      s.today = false;
       var sdate = moment(new Date(s.dates[0]));
       if (0 === moment(sdate).day(0).startOf('day').diff(moment().day(0).startOf('day'))) {
-        m.this_week= true;
+        m.this_week = true;
       }
       if (0 === moment(sdate).day(0).startOf('day').diff(moment().day(7).startOf('day'))) {
         m.next_week = true;
@@ -59,7 +61,7 @@ var render = function(res, movies){
       }
     });
   });
-  
+
   res.render('index', {
     movies: movies,
     date_month: function() {
@@ -100,13 +102,11 @@ app.get('/', function(req, res){
 
   var query = Movie.where("screenings.dates").gte(lastSunday).lte(nextSunday);
   query.sort({"screenings.dates": 1});
-  
-  query.exec(function(err, movies){
-    
-    render(res, movies);
 
+  query.exec(function(err, movies){
+    render(res, movies);
   });
-    
+
 });
 
 app.get('/create', function(req, res) {
@@ -128,7 +128,7 @@ app.get('/all', function(req, res){
   
   var query = Movie.find();
   query.sort({"screenings.dates": 1});
-    
+
   query.exec(function(err, movies){
     render(res, movies);
   });
@@ -153,15 +153,14 @@ app.get('/imdb', function(req,res){
       rest.get('http://www.omdbapi.com/', {
         query: query,
         parser: rest.parsers.json
-      })
-        .on('complete', function(data) {
+      }).on('complete', function(data) {
         var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
         if(movie.title=='HOPE SPRINGS') {
           var util = require('util'),
               exec = require('child_process').exec,
               child,
               url = data.Poster;
-        
+
           child = exec('wget ' + url,
             function (error, stdout, stderr) {
               console.log('stdout: ' + stdout);
