@@ -6,15 +6,11 @@ Deployed with Heroku at:
 http://soundmotion.it/
 
 # TODO
-* add link to google maps position for venues (see down list)
-* add link to imdb (https://github.com/worr/node-imdb-api)
+* movie detail page with trailer and social share buttons
+* add venue maps
 
-#MAYBES
-* LOGO
-* @text-decoration: line-through;@ to last week movie title
-* bigger font for this week's movie (or bigger font to
-label-success)
-* specify if movies have subs or not
+# MAYBES
+* specify if movies have subs or not (how do we know?)
 
 # The venues
 Anteo: https://plus.google.com/102257842705586039802/about
