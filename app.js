@@ -154,7 +154,10 @@ app.get('/imdb', function(req,res){
         query: query,
         parser: rest.parsers.json
       }).on('complete', function(data) {
-        var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
+        if (data.Poster) {
+          var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
+          data.Poster=tmp[1];
+        }
         if(movie.title=='HOPE SPRINGS') {
           var util = require('util'),
               exec = require('child_process').exec,
@@ -170,10 +173,7 @@ app.get('/imdb', function(req,res){
               }
           });  
         }
-        data.Poster=tmp[1];
-        // console.log(tmp[1]);
         movie.omdb = data
-        movie.omdb.Poster=tmp[1];
         movie.save();
       });
     });
