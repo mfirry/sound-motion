@@ -180,9 +180,6 @@ exports.movies = new Array({
     }, {
         "venue": "Arcobaleno",
         "dates": [new Date(Date.parse("2013-01-29T15:20")), new Date(Date.parse("2013-01-29T17:40")), new Date(Date.parse("2013-01-29T20:00")), new Date(Date.parse("2013-01-29T22:00"))]
-    }, {
-        "venue": "Mexico",
-        "dates": [new Date(Date.parse("2013-01-31T13:00")), new Date(Date.parse("2013-01-31T15:20")), new Date(Date.parse("2013-01-31T17:40")), new Date(Date.parse("2013-01-31T20:00")), new Date(Date.parse("2013-01-31T22:00"))]
     }]    
 }, {
     "title": "THE ANGELS' SHARE",
