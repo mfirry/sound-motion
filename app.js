@@ -18,7 +18,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
+  app.use(app.router);  
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -39,7 +39,7 @@ if (process.argv[2]) {
 
 // DB Schema
 var movie = new mongoose.Schema({ title: String, imdb: String, omdb: Object, description: String, screenings: [screening] });
-var screening = new mongoose.Schema ({venue: String, dates: [Date]});
+var screening = new mongoose.Schema({venue: String, dates: [Date]});
 var Movie = db.model('Movie', movie);
 var Screening = db.model('Screening', screening)
 
@@ -154,10 +154,7 @@ app.get('/imdb', function(req,res){
         query: query,
         parser: rest.parsers.json
       }).on('complete', function(data) {
-        if (data.Poster) {
-          var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
-          data.Poster=tmp[1];
-        }
+        var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
         if(movie.title=='HOPE SPRINGS') {
           var util = require('util'),
               exec = require('child_process').exec,
@@ -173,7 +170,10 @@ app.get('/imdb', function(req,res){
               }
           });  
         }
+        data.Poster=tmp[1];
+        // console.log(tmp[1]);
         movie.omdb = data
+        movie.omdb.Poster=tmp[1];
         movie.save();
       });
     });
@@ -191,6 +191,22 @@ app.get('/mexico', function(req,res){
 
 app.get('/arcobaleno', function(req,res){
   res.render('arcobaleno');
+});
+
+app.get('/entry', function(req,res){
+  res.render('entry');
+});
+
+app.post('/entry', function(req, res){
+  console.log('title: ' + req.body.title);
+  console.log('imdb: ' + req.body.imdb);
+  console.log('description: ' + req.body.description);
+  var screenings = new Array();
+  _.each(req.body.screening, function() {
+    new Screening({venue: String, dates: [Date]});
+  });
+  var m = new Movie({ title: req.body.title, imdb: req.body.imdb, description: req.body.description });
+  res.send("ok");
 });
 
 app.listen(app.get('port') || process.env.PORT || 3000, function() {
