@@ -26,22 +26,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-// DB connection: connect here, use it everywhere
-var mongoose = require('mongoose');
-
-if (process.argv[2]) {
-  var db = mongoose.connect(process.argv[2]);
-} else if (process.env.MONGOHQ_URL) {
-  var db = mongoose.connect(process.env.MONGOHQ_URL);
-} else {
-  var db = mongoose.connect('mongodb://localhost/local');
-}
-
-// DB Schema
-var movie = new mongoose.Schema({ title: String, imdb: String, omdb: Object, description: String, screenings: [screening] });
-var screening = new mongoose.Schema({venue: String, dates: [Date]});
-var Movie = db.model('Movie', movie);
-var Screening = db.model('Screening', screening)
+var database = require("./database.js");
 
 var render = function(res, movies){
   _.each(movies, function(m){
@@ -100,7 +85,7 @@ app.get('/', function(req, res){
   var lastSunday = moment(new Date()).day(0).toDate();
   var nextSunday = moment(new Date()).day(14).toDate();
 
-  var query = Movie.where("screenings.dates").gte(lastSunday).lte(nextSunday);
+  var query = database.Movie.where("screenings.dates").gte(lastSunday).lte(nextSunday);
   query.sort({"screenings.dates": 1});
 
   query.exec(function(err, movies){
@@ -113,12 +98,12 @@ app.get('/create', function(req, res) {
     var de = require('./data_entry');
 
     // Empty the mongodb collection
-    Movie.remove({}, function(){
+    database.Movie.remove({}, function(){
       console.log("== REMOVED ALL MOVIES ==")
       // Fill it with the objects from the data_entry file
       for (var k in de.movies) {
         console.log('inserting :' + de.movies[k].title);
-        new Movie(de.movies[k]).save();
+        new database.Movie(de.movies[k]).save();
       }
       res.send("ok");
     });
@@ -126,7 +111,7 @@ app.get('/create', function(req, res) {
 
 app.get('/all', function(req, res){
   
-  var query = Movie.find();
+  var query = database.Movie.find();
   query.sort({"screenings.dates": 1});
 
   query.exec(function(err, movies){
@@ -138,7 +123,7 @@ app.get('/imdb', function(req,res){
 
   var rest = require('restler');
 
-  Movie.find(function(err, movies) {
+  database.Movie.find(function(err, movies) {
     _.each(movies, function(movie) {
       if (movie.imdb) {
         // console.log(movie.imdb)
@@ -205,7 +190,7 @@ app.post('/entry', function(req, res){
   _.each(req.body.screening, function() {
     new Screening({venue: String, dates: [Date]});
   });
-  var m = new Movie({ title: req.body.title, imdb: req.body.imdb, description: req.body.description });
+  var m = new database.Movie({ title: req.body.title, imdb: req.body.imdb, description: req.body.description });
   res.send("ok");
 });
 
