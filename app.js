@@ -6,7 +6,13 @@ var express = require('express')
   , cons    = require('consolidate')
   , moment  = require('moment')
   , _       = require('underscore');
-  
+
+/**
+ * Internal deps
+ */  
+var database = require("./database.js");
+
+
 var app = express();
 
 app.configure(function(){
@@ -26,9 +32,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-var database = require("./database.js");
-
-var render = function(res, movies){
+function render(res, movies){
   _.each(movies, function(m){
     m.today = false;
     _.each(m.screenings, function(s){
@@ -76,12 +80,56 @@ var render = function(res, movies){
   });
 };
 
-app.get('/test', function(req, res){
-  res.render('index');
-});
+function all(res) {
+  var query = database.Movie.find();
+  query.sort({"screenings.dates": 1});
+
+  query.exec(function(err, movies){
+    render(res, movies);
+  });
+};
+
+function imdb() {
+  var rest = require('restler');
+  database.Movie.find(function(err, movies) {
+    _.each(movies, function(movie) {
+      if (movie.imdb) {
+        // console.log(movie.imdb)
+        var query = {
+          i: movie.imdb
+        }
+      } else {
+        var query = {
+          t: movie.title
+        }
+      }
+      rest.get('http://www.omdbapi.com/', {
+        query: query,
+        parser: rest.parsers.json
+      }).on('complete', function(data) {
+        var util = require('util'),
+        
+        var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
+        exec = require('child_process').exec, child, url = data.Poster;
+
+        child = exec('wget -nc -P public/img/posters/ ' + url,
+        function (error, stdout, stderr) {
+          console.log('stdout: ' + stdout);
+          console.log('stderr: ' + stderr);
+          if (error !== null) {
+            console.log('exec error: ' + error);
+          }
+        });  
+        data.Poster = tmp[1];
+        movie.omdb = data
+        movie.omdb.Poster = tmp[1];
+        movie.save();
+      });
+    });
+  });
+};
 
 app.get('/', function(req, res){
-
   var lastSunday = moment(new Date()).day(0).toDate();
   var nextSunday = moment(new Date()).day(14).toDate();
 
@@ -91,7 +139,20 @@ app.get('/', function(req, res){
   query.exec(function(err, movies){
     render(res, movies);
   });
+});
 
+app.get('/:name', function(req, res){
+  if(req.params.name == 'imdb') imdb();
+  if(req.params.name == 'all') all(res);
+  else {
+    var query = database.Movie.findOne({"url": req.params.name}); //TODO: maybe 'uri' is better than url
+    query.exec(function(err, movie) {
+      if(err) res.send(404);
+      else {
+        res.render("detail", movie);
+      }
+    });
+  }
 });
 
 app.get('/create', function(req, res) {
@@ -109,90 +170,40 @@ app.get('/create', function(req, res) {
     });
 });
 
-app.get('/all', function(req, res){
-  
-  var query = database.Movie.find();
-  query.sort({"screenings.dates": 1});
+app.get('/all', function(req, res) { all(res); });
 
-  query.exec(function(err, movies){
-    render(res, movies);
-  });
+app.get('/imdb', function(req, res) { 
+  imdb(); 
+  res.send("ok"); 
 });
 
-app.get('/imdb', function(req,res){
-
-  var rest = require('restler');
-
-  database.Movie.find(function(err, movies) {
-    _.each(movies, function(movie) {
-      if (movie.imdb) {
-        // console.log(movie.imdb)
-        var query = {
-          i: movie.imdb
-        }
-      } else {
-        var query = {
-          t: movie.title
-        }
-      }
-      rest.get('http://www.omdbapi.com/', {
-        query: query,
-        parser: rest.parsers.json
-      }).on('complete', function(data) {
-        var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
-        if(movie.title=='HOPE SPRINGS') {
-          var util = require('util'),
-              exec = require('child_process').exec,
-              child,
-              url = data.Poster;
-
-          child = exec('wget ' + url,
-            function (error, stdout, stderr) {
-              console.log('stdout: ' + stdout);
-              console.log('stderr: ' + stderr);
-              if (error !== null) {
-                console.log('exec error: ' + error);
-              }
-          });  
-        }
-        data.Poster=tmp[1];
-        // console.log(tmp[1]);
-        movie.omdb = data
-        movie.omdb.Poster=tmp[1];
-        movie.save();
-      });
-    });
-  });
-  res.send("ok");
-});
-
-app.get('/anteo', function(req,res){
+app.get('/anteo', function(req, res) {
   res.render('anteo');
 });
 
-app.get('/mexico', function(req,res){
+app.get('/mexico', function(req, res) {
   res.render('mexico');
 });
 
-app.get('/arcobaleno', function(req,res){
+app.get('/arcobaleno', function(req, res) {
   res.render('arcobaleno');
 });
 
-app.get('/entry', function(req,res){
+app.get('/entry', function(req, res) {
   res.render('entry');
 });
 
-app.post('/entry', function(req, res){
-  console.log('title: ' + req.body.title);
-  console.log('imdb: ' + req.body.imdb);
-  console.log('description: ' + req.body.description);
-  var screenings = new Array();
-  _.each(req.body.screening, function() {
-    new Screening({venue: String, dates: [Date]});
-  });
-  var m = new database.Movie({ title: req.body.title, imdb: req.body.imdb, description: req.body.description });
-  res.send("ok");
-});
+// app.post('/entry', function(req, res){
+//   console.log('title: ' + req.body.title);
+//   console.log('imdb: ' + req.body.imdb);
+//   console.log('description: ' + req.body.description);
+//   var screenings = new Array();
+//   _.each(req.body.screening, function() {
+//     new Screening({venue: String, dates: [Date]});
+//   });
+//   var m = new database.Movie({ title: req.body.title, imdb: req.body.imdb, description: req.body.description });
+//   res.send("ok");
+// });
 
 app.listen(app.get('port') || process.env.PORT || 3000, function() {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
