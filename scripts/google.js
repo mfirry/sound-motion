@@ -16,6 +16,8 @@ var insert = function() {
       movie.imdb = row.imdb;
       movie.description = row.description;
       movie.screenings = [];
+      //possibly useful for direct url to movie detail page
+      //movie.url = row.title.toLowerCase().replace(/\W/g, '-');
       _.each([row.screening1, row.screening2, row.screening3, row.screening4,
              row.screening5], function(s) {
                // If typeof === object, the cell is probably empty
@@ -23,7 +25,7 @@ var insert = function() {
       });
       database.Movie.create(movie, function(err){
         if (err) console.log(err);
-        else console.log("Inserted: " + venue + " - " + movie.title);
+        else console.log("Inserted: " + venue + " - " + movie.title + ", "+movie.url);
       });
       // database.Movie.update({title: movie.title}, movie, {upsert: true}, function(err){
       //   console.log("- " + movie.title);
