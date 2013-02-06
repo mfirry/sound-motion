@@ -9,7 +9,7 @@ if (process.argv[2]) {
 }
 
 // DB Schema
-var movie = new mongoose.Schema({ title: String, imdb: String, omdb: Object, description: String, screenings: [screening] });
+var movie = new mongoose.Schema({ title: String, imdb: String, omdb: Object, description: String, screenings: [screening], url: String });
 var screening = new mongoose.Schema({venue: String, dates: [Date]});
 var Movie = db.model('Movie', movie);
 var Screening = db.model('Screening', screening)
