@@ -9,9 +9,9 @@
 		<!-- WEBAPP -->
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-		<link rel="stylesheet" href="ioswebapp/add2home.css"/>
-		<script type="application/javascript" src="ioswebapp/add2home.js"></script>
-		<script type="application/javascript" src="ioswebapp/links_target.js"></script>
+		<link rel="stylesheet" href="/ioswebapp/add2home.css"/>
+		<script type="application/javascript" src="/ioswebapp/add2home.js"></script>
+		<script type="application/javascript" src="/ioswebapp/links_target.js"></script>
 		<link rel="apple-touch-icon" href="ioswebapp/57x57.png" />
 		<link rel="apple-touch-icon" size="72x72" href="ioswebapp/72x72.png" />
 		<link rel="apple-touch-icon" size="114x114" href="ioswebapp/114x114.png" />
@@ -23,8 +23,8 @@
 		<meta name="format-detection" content="telephone=no"/>
 		<!-- end WEBAPP -->
 	
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/bootstrap-responsive.css" rel="stylesheet">
 		    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <script type="text/javascript">
 
@@ -63,7 +63,6 @@
             <h1><a href="/"><span style="font-weight:normal !important;">sound&amp;</span>motion</a></h1>
             <p class="sottotitolo">english language movies in Milano</p>
           </div>
-          {{movie}}
             <div class="cornice">
               <div class="contAlert">
                 {{#today}}<span class="today">today</span>{{/today}}
@@ -75,23 +74,21 @@
               <div class="row-fluid">
 
                 <div class="span3">
-                    <a><img src="img/posters/{{omdb.Poster}}" alt="poster"></a>
+                    <a><img src="/img/posters/{{movie.omdb.Poster}}" alt="poster"></a>
                 </div>
 
                 <div class="span9 bottom20">
-                <h4>{{title}}</h4>
+                <h4>{{movie.title}}</h4>
                 </div>
 
                 <div class="span9">
                   {{#movie.screenings}}
-
                     {{#today}}
                     <div class="span4 boxRosso bottom20" style="height: 100px;">
                     {{/today}}
                     {{^today}}
                     <div class="span4 boxVerde bottom20" style="height: 100px;">
                     {{/today}}
-
                     <div class="dataCinema">
                       <div class="giorno">{{#date_day}}{{dates.0}}{{/date_day}}</div>
                       <div class="meseCinema"><span class="cinema">{{venue}}</span><br/>
@@ -112,8 +109,8 @@
                 </div>
 
                 <div class="span9">
-                  <div class="span4"><p><span style="font-weight:bold;">Directed by:</span><br/>{{omdb.Director}}<br/><br/><span style="font-weight:bold;">Starring:</span><br/>{{omdb.Actors}}</p></div>
-                  <div class="span8 descrizione"><p>{{description}}</p></div>
+                  <div class="span4"><p><span style="font-weight:bold;">Directed by:</span><br/>{{movie.omdb.Director}}<br/><br/><span style="font-weight:bold;">Starring:</span><br/>{{movie.omdb.Actors}}</p></div>
+                  <div class="span8 descrizione"><p>{{movie.description}}</p></div>
                 </div>
               </div>
             </div>

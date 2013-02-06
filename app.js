@@ -102,18 +102,44 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/:name', function(req, res){
-  if(req.params.name == 'imdb') imdb();
-  if(req.params.name == 'all') all(res);
-  else {
+app.get('/movie/:name', function(req, res){
+  // if(req.params.name == 'imdb') imdb();
+  // if(req.params.name == 'all') all(res);
+  // else {
     var query = database.Movie.findOne({"url": req.params.name}); //TODO: maybe 'uri' is better than url
     query.exec(function(err, movie) {
       if(err) res.send(404);
       else {
-        res.render("detail", movie);
+        res.render("detail", {
+    movie: movie,
+    date_month: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("MMMM");
+      }
+    },
+    date_day: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("D");
+      }
+    },
+    time_hour: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("HH");
+      }
+    },
+    time_mins: function() {
+      return function(text, render) {
+        var date = moment(new Date(render(text)));
+        return date.format("mm");
+      }
+    }
+  });
       }
     });
-  }
+  // }
 });
 
 app.get('/create', function(req, res) {
