@@ -18,7 +18,8 @@
     "date-utils": "1.2.11",
     "restler": "*",
     "underscore": "*",
-    "spreadsheet": "*"
+    "spreadsheet": "*",
+    "async": "*"
   },
   "engines": {
     "node": "0.8.6",

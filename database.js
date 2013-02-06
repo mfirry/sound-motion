@@ -15,3 +15,5 @@ var Movie = db.model('Movie', movie);
 var Screening = db.model('Screening', screening)
 
 exports.Movie = Movie;
+exports.Screening = Screening;
+exports.db = db;
