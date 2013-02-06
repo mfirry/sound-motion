@@ -1,8 +1,9 @@
 var doc = "0AtFF6SiRVHtIdEpzelh6S21OODNLeHpTZ2FWWjU3WWc";
 
 var           _ = require("underscore");
+var      moment = require("moment");
 var Spreadsheet = require("spreadsheet");
-var async       = require('async');
+var async       = require("async");
 var database    = require('../database');
 
 var map = {};
@@ -24,20 +25,22 @@ function insert(id, venue, callback) {
         };
         map[row.imdb] = movie;
       } else {
-        console.log("existing: "+map[row.imdb].title);
+        // console.log("existing: "+map[row.imdb].title);
       }
-      var zzzz = [];
+      var dates = [];
       // console.log(venue + " " + row.screening1);
       _.each([row.screening1, row.screening2, row.screening3, row.screening4,
              row.screening5], function(s) {
-               // If typeof === object, the cell is probably empty
-               if (typeof(s)!=="object") zzzz.push(s);
+         // If typeof === object, the cell is probably empty
+         if (typeof(s)!=="object") {
+           var date = moment(s, "DD/MM/YYYY HH:mm");
+           dates.push(date);
+         }
       });
-      // console.log(venue + " dates " + zzzz)
 
       // console.log("l1:"+map[row.imdb].screenings);
-      // console.log("z:"+zzzz);
-      var x = new database.Screening({venue: venue, dates: zzzz});
+      var x = new database.Screening({venue: venue, dates: dates});
+      // console.log(map);
       map[row.imdb].screenings.push(x);
       // console.log("l2:"+map[row.imdb].screenings);
       // console.log('==='+venue+'==='+row.title);
