@@ -89,44 +89,6 @@ function all(res) {
   });
 };
 
-function imdb() {
-  var rest = require('restler');
-  database.Movie.find(function(err, movies) {
-    _.each(movies, function(movie) {
-      if (movie.imdb) {
-        // console.log(movie.imdb)
-        var query = {
-          i: movie.imdb
-        }
-      } else {
-        var query = {
-          t: movie.title
-        }
-      }
-      rest.get('http://www.omdbapi.com/', {
-        query: query,
-        parser: rest.parsers.json
-      }).on('complete', function(data) {
-        var util = require('util'),
-          tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
-        exec = require('child_process').exec, child, url = data.Poster;
-
-        child = exec('wget -nc -P public/img/posters/ ' + url,
-        function (error, stdout, stderr) {
-          console.log('stdout: ' + stdout);
-          console.log('stderr: ' + stderr);
-          if (error !== null) {
-            console.log('exec error: ' + error);
-          }
-        });  
-        data.Poster = tmp[1];
-        movie.omdb = data
-        movie.omdb.Poster = tmp[1];
-        movie.save();
-      });
-    });
-  });
-};
 
 app.get('/', function(req, res){
   var lastSunday = moment(new Date()).day(0).toDate();
