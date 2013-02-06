@@ -1,3 +1,4 @@
-node_modules
-public/img/.DS_Store
-.c9revisions
+/node_modules
+/public/img/.DS_Store
+/public/img/posters/*
+/.c9revisions
