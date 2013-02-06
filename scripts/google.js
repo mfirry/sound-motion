@@ -6,16 +6,16 @@ var Spreadsheet = require("spreadsheet");
 var async       = require("async");
 var database    = require('../database');
 
-var map = {};
+var movies = {};
 
-function insert(id, venue, callback) {
+function parse(id, venue, callback) {
   var sheet = new Spreadsheet(doc);
   sheet.worksheet(id, function(err,ws){
     console.log("=== v: " + venue);
     ws.eachRow(function(err,row,meta){
       if(err) {console.log(err);}
 
-      if (!map[row.imdb]) {
+      if (!movies[row.imdb]) {
         movie = {
           title: row.title,
           imdb: row.imdb,
@@ -23,12 +23,9 @@ function insert(id, venue, callback) {
           url: row.title.toLowerCase().replace(/\W/g, '-'),
           screenings: []
         };
-        map[row.imdb] = movie;
-      } else {
-        // console.log("existing: "+map[row.imdb].title);
+        movies[row.imdb] = movie;
       }
       var dates = [];
-      // console.log(venue + " " + row.screening1);
       _.each([row.screening1, row.screening2, row.screening3, row.screening4,
              row.screening5], function(s) {
          // If typeof === object, the cell is probably empty
@@ -38,17 +35,10 @@ function insert(id, venue, callback) {
          }
       });
 
-      // console.log("l1:"+map[row.imdb].screenings);
       var x = new database.Screening({venue: venue, dates: dates});
-      // console.log(map);
-      map[row.imdb].screenings.push(x);
-      // console.log("l2:"+map[row.imdb].screenings);
-      // console.log('==='+venue+'==='+row.title);
-      
+      movies[row.imdb].screenings.push(x);
 
-      // console.log(map[row.imdb])
-
-      console.log("added to map: " + row.title)
+      console.log("added to movies: " + row.title)
 
       if(meta.index === meta.total){
         // movie.last_row = true;
@@ -78,13 +68,13 @@ function insert(id, venue, callback) {
 database.Movie.remove({}, function(){
   console.log("!! Removed all movies");
   async.series([
-    function(callback){ insert(1, "anteo", callback) },
-    function(callback){ insert(2, "arcobaleno", callback) },
-    function(callback){ insert(3, "mexico", callback) },
+    function(callback){ parse(1, "anteo", callback) },
+    function(callback){ parse(2, "arcobaleno", callback) },
+    function(callback){ parse(3, "mexico", callback) },
   ], function(err, results){
     console.log(err);
     console.log('\\m/');
-    console.log(map);
+    console.log(movies);
     database.db.disconnect();
   })
 });
