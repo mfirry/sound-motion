@@ -108,8 +108,7 @@ function imdb() {
         parser: rest.parsers.json
       }).on('complete', function(data) {
         var util = require('util'),
-        
-        var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
+          tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
         exec = require('child_process').exec, child, url = data.Poster;
 
         child = exec('wget -nc -P public/img/posters/ ' + url,
@@ -141,10 +140,7 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/:name', function(req, res){
-  if(req.params.name == 'imdb') imdb();
-  if(req.params.name == 'all') all(res);
-  else {
+app.get('/movie/:name', function(req, res){
     var query = database.Movie.findOne({"url": req.params.name}); //TODO: maybe 'uri' is better than url
     query.exec(function(err, movie) {
       if(err) res.send(404);
@@ -152,7 +148,6 @@ app.get('/:name', function(req, res){
         res.render("detail", movie);
       }
     });
-  }
 });
 
 app.get('/create', function(req, res) {
