@@ -63,17 +63,18 @@ function insert(callback) {
         //callback(err);
       } else {
         console.log("inserted: " + m.title);
-        imdb(movie);
-        inserted++;
-        if (inserted == _.keys(movies).length) {
-          callback(null);
-        }
+        imdb(movie, function(){
+          inserted++;
+          if (inserted == _.keys(movies).length) {
+            callback(null);
+          }
+        });
       }
     });
   });
 };
 
-function imdb(movie) {
+function imdb(movie, done) {
   console.log("IMDB: " + movie.title);
 
   if (movie.imdb) {
@@ -92,13 +93,13 @@ function imdb(movie) {
     if (data.Poster) {
       console.log("Wgetting poster image for " + movie.title);
 
-      tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
-      exec = require('child_process').exec, child, url = data.Poster;
-      child = exec(
-        'wget -nc -P public/img/posters/ ' + url,
+      var tmp = data.Poster.split('http://ia.media-imdb.com/images/M/');
+      var exec = require('child_process').exec;
+      var child = exec(
+        'wget -nc -P public/img/posters/ ' + data.Poster,
         function (error, stdout, stderr) {
-          console.log('stdout: ' + stdout);
-          console.log('stderr: ' + stderr);
+          // console.log('stdout: ' + stdout);
+          // console.log('stderr: ' + stderr);
           if (error !== null) {
             console.log('exec error: ' + error);
           }
@@ -109,11 +110,12 @@ function imdb(movie) {
     data.Poster = tmp[1];
     movie.omdb = data
     movie.omdb.Poster = tmp[1];
-    movie.save(function(){
+    movie.save(function(err){
       if (err) {
-        console.log(err);
+        console.log('error');
       } else {
         console.log("updated on db: " + movie.title);
+        done();
       }
     });
   });
