@@ -140,7 +140,10 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/movie/:name', function(req, res){
+app.get('/:name', function(req, res){
+  if(req.params.name == 'imdb') imdb();
+  if(req.params.name == 'all') all(res);
+  else {
     var query = database.Movie.findOne({"url": req.params.name}); //TODO: maybe 'uri' is better than url
     query.exec(function(err, movie) {
       if(err) res.send(404);
@@ -148,6 +151,7 @@ app.get('/movie/:name', function(req, res){
         res.render("detail", movie);
       }
     });
+  }
 });
 
 app.get('/create', function(req, res) {
