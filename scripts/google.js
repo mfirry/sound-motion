@@ -7,8 +7,10 @@ var async       = require("async");
 var database    = require('../database');
 
 var movies = {};
+var inserted = 0;
 
 function parse(id, venue, callback) {
+
   var sheet = new Spreadsheet(doc);
   sheet.worksheet(id, function(err,ws){
     console.log("=== v: " + venue);
@@ -45,6 +47,28 @@ function parse(id, venue, callback) {
         console.log("ultima riga")
         callback(null);
       }
+    })
+  });
+
+};
+
+function insert(callback) {
+  _.each(movies, function(m) {
+    database.Movie.create(m, function(err){
+      if (err) {
+        console.log('ERR: '+err);
+        //callback(err);
+      } else {
+        console.log("inserted: " + m.title);
+        inserted++;
+        if (inserted == _.keys(movies).length) {
+          console.log("fine");
+          callback(null);
+        }
+      }
+    });
+  });
+};
 
       // database.Movie.create(movie, function(err){
       //   console.log("!!"+movie.last_row);
@@ -60,10 +84,6 @@ function parse(id, venue, callback) {
       //   console.log("- " + movie.title);
       //   if (err) console.log(err);
       // });
-    })
-  });
-
-};
 
 database.Movie.remove({}, function(){
   console.log("!! Removed all movies");
@@ -71,10 +91,12 @@ database.Movie.remove({}, function(){
     function(callback){ parse(1, "anteo", callback) },
     function(callback){ parse(2, "arcobaleno", callback) },
     function(callback){ parse(3, "mexico", callback) },
+    function(callback){ insert(callback) }
   ], function(err, results){
-    console.log(err);
+    if (err) {
+      console.log(err);
+    }
     console.log('\\m/');
-    console.log(movies);
     database.db.disconnect();
   })
 });
