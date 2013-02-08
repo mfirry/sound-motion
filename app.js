@@ -32,7 +32,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-function render(res, movies){
+function render(res, movies, all){
   _.each(movies, function(m){
     m.today = false;
     _.each(m.screenings, function(s){
@@ -76,7 +76,7 @@ function render(res, movies){
         var date = moment(new Date(render(text)));
         return date.format("mm");
       }
-    }
+    }, show_all: all
   });
 };
 
@@ -85,7 +85,7 @@ function all(res) {
   query.sort({"screenings.dates": 1});
 
   query.exec(function(err, movies){
-    render(res, movies);
+    render(res, movies, 'none');
   });
 };
 
@@ -98,7 +98,7 @@ app.get('/', function(req, res){
   query.sort({"screenings.dates": 1});
 
   query.exec(function(err, movies){
-    render(res, movies);
+    render(res, movies, 'show');
   });
 });
 
