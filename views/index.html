@@ -80,7 +80,7 @@
               <div class="row-fluid">
 
                 <div class="span3">
-                    <a><img src="img/posters/{{omdb.Poster}}" alt="poster"></a>
+                    <a><img src="img/posters/{{omdb.Poster}}" alt="{{title}}"></a>
                 </div>
 
                 <div class="span9 bottom20">
@@ -99,7 +99,7 @@
 
                     <div class="dataCinema">
                       <div class="giorno">{{#date_day}}{{dates.0}}{{/date_day}}</div>
-                      <div class="meseCinema"><span class="cinema">{{venue}}</span><br/>
+                      <div class="meseCinema"><span class="cinema" id="{{venue}}">{{venue}}</span><br/>
                       {{#date_month}}{{dates.0}}{{/date_month}}
                       </div>
                     </div>
@@ -129,7 +129,7 @@
           <div class="row-fluid footer">
             <div class="span12" style="margin-top: 20px">
               <p><span style="font-weight:bold;">sound&amp;motion</span> is brought to you by <a href="http://www.smallcapitals.it">smallcapitals</a>.
-                Source code and issues on <a href="https://github.com/smallcapitals/sound-motion">github</a>.</p>
+                Check official <a href="http://goo.gl/zzGp5">website</a>.</p>
             </div>
           </div>            
         </div>
