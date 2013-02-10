@@ -8,10 +8,9 @@ var express = require('express')
   , _       = require('underscore');
 
 /**
- * Internal deps
+ * Internal module
  */  
 var database = require("./database.js");
-
 
 var app = express();
 
@@ -89,80 +88,76 @@ function all(res) {
   });
 };
 
-
 app.get('/', function(req, res){
   var lastSunday = moment(new Date()).day(0).toDate();
   var nextSunday = moment(new Date()).day(14).toDate();
 
   var query = database.Movie.where("screenings.dates").gte(lastSunday).lte(nextSunday);
   query.sort({"screenings.dates": 1});
-
   query.exec(function(err, movies){
     render(res, movies, 'show');
   });
 });
 
-app.get('/movie/:name', function(req, res){
-  // if(req.params.name == 'imdb') imdb();
-  // if(req.params.name == 'all') all(res);
-  // else {
-    var query = database.Movie.findOne({"url": req.params.name}); //TODO: maybe 'uri' is better than url
-    query.exec(function(err, movie) {
-      if(err) res.send(404);
-      else {
-        res.render("detail", {
-    movie: movie,
-    date_month: function() {
-      return function(text, render) {
-        var date = moment(new Date(render(text)));
-        return date.format("MMMM");
-      }
-    },
-    date_day: function() {
-      return function(text, render) {
-        var date = moment(new Date(render(text)));
-        return date.format("D");
-      }
-    },
-    time_hour: function() {
-      return function(text, render) {
-        var date = moment(new Date(render(text)));
-        return date.format("HH");
-      }
-    },
-    time_mins: function() {
-      return function(text, render) {
-        var date = moment(new Date(render(text)));
-        return date.format("mm");
-      }
-    }
-  });
-      }
+app.get('/movie/:name', function (req, res) {
+    var query = database.Movie.findOne({
+        "url": req.params.name
     });
-  // }
-});
-
-app.get('/create', function(req, res) {
-    var de = require('./data_entry');
-
-    // Empty the mongodb collection
-    database.Movie.remove({}, function(){
-      console.log("== REMOVED ALL MOVIES ==")
-      // Fill it with the objects from the data_entry file
-      for (var k in de.movies) {
-        console.log('inserting :' + de.movies[k].title);
-        new database.Movie(de.movies[k]).save();
-      }
-      res.send("ok");
+    query.exec(function (err, movie) {
+        if (err) res.send(404);
+        else {
+            res.render("detail", {
+                movie: movie,
+                date_month: function () {
+                    return function (text, render) {
+                        var date = moment(new Date(render(text)));
+                        return date.format("MMMM");
+                    }
+                },
+                date_day: function () {
+                    return function (text, render) {
+                        var date = moment(new Date(render(text)));
+                        return date.format("D");
+                    }
+                },
+                time_hour: function () {
+                    return function (text, render) {
+                        var date = moment(new Date(render(text)));
+                        return date.format("HH");
+                    }
+                },
+                time_mins: function () {
+                    return function (text, render) {
+                        var date = moment(new Date(render(text)));
+                        return date.format("mm");
+                    }
+                }
+            });
+        }
     });
 });
+
+// app.get('/create', function(req, res) {
+//     var de = require('./data_entry');
+// 
+//     // Empty the mongodb collection
+//     database.Movie.remove({}, function(){
+//       console.log("== REMOVED ALL MOVIES ==")
+//       // Fill it with the objects from the data_entry file
+//       for (var k in de.movies) {
+//         console.log('inserting :' + de.movies[k].title);
+//         new database.Movie(de.movies[k]).save();
+//       }
+//       res.send("ok");
+//     });
+// });
 
 app.get('/all', function(req, res) { all(res); });
 
-app.get('/imdb', function(req, res) { 
-  imdb(); 
-  res.send("ok"); 
-});
+// app.get('/imdb', function(req, res) { 
+//   imdb(); 
+//   res.send("ok"); 
+// });
 
 app.get('/anteo', function(req, res) {
   res.render('anteo');
