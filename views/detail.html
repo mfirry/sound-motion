@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="span9 bottom20">
-                <h4>{{movie.title}}</h4>
+                  <h4 style="display:inline">{{movie.title}}</h4>
                 </div>
 
                 <div class="span9">
@@ -109,8 +109,16 @@
                 </div>
 
                 <div class="span9">
-                  <div class="span4"><p><span style="font-weight:bold;">Directed by:</span><br/>{{movie.omdb.Director}}<br/><br/><span style="font-weight:bold;">Starring:</span><br/>{{movie.omdb.Actors}}</p></div>
-                  <div class="span8 descrizione"><p>{{movie.description}}</p></div>
+                  <div class="span4">
+                    <p>
+                      <span style="font-weight:bold;">Directed by:</span><br/>{{movie.omdb.Director}}
+                      <br/><br/>
+                      <span style="font-weight:bold;">IMDb rating:</span>&nbsp;{{movie.omdb.imdbRating}}
+                      (<a style="font-size:10px" href="http://www.imdb.com/title/{{movie.imdb}}">link</a>)
+                        <br/><br/>
+                      <span style="font-weight:bold;">Starring:</span><br/>{{movie.omdb.Actors}}</p>
+                    </div>
+                  <div class="span8 descrizione"><p>{{movie.omdb.Plot}}</p></div>
                 </div>
               </div>
             </div>
@@ -119,8 +127,8 @@
           </p>
           <div class="row-fluid footer">
             <div class="span12" style="margin-top: 20px">
-              <p><span style="font-weight:bold;">sound&amp;motion</span> is brought to you by <a href="http://www.smallcapitals.it">smallcapitals</a>.
-                Source code and issues on <a href="https://github.com/smallcapitals/sound-motion">github</a>.</p>
+              <p><span style="font-weight:bold;">sound&amp;motion</span> is brought to you by <a href="http://www.smallcapitals.it">smallcapitals</a>.</p>
+              <p id="spaziocinema" style="font-size:10px">Check official <a href="http://goo.gl/zzGp5">website</a>.</p>
             </div>
           </div>            
         </div>
