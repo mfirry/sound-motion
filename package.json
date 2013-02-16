@@ -20,7 +20,8 @@
     "underscore": "*",
     "spreadsheet": "*",
     "async": "*",
-    "coffee-script": "*"
+    "coffee-script": "*",
+    "slug": "*"
   },
   "engines": {
     "node": "0.8.6",

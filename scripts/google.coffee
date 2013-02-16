@@ -5,6 +5,7 @@ moment      = require("moment")
 rest        = require('restler')
 Spreadsheet = require("spreadsheet")
 async       = require("async")
+slug        = require("slug")
 database    = require('../database')
 
 movies = {}
@@ -23,7 +24,6 @@ parse = (id, venue, callback) ->
           title: row.title,
           imdb: row.imdb,
           description: row.description,
-          url: row.title.toLowerCase().replace(/\W/g, '-'),
           screenings: []
         }
         movies[row.imdb] = movie
@@ -88,9 +88,14 @@ imdb = (movie, done) ->
           # console.log('stderr: ' + stderr)
           if (error != null) then console.log('exec error: ' + error)
 
-    data.Poster = tmp[1]
+      data.Poster = tmp[1]
+
     movie.omdb = data
-    movie.omdb.Poster = tmp[1]
+
+    # Generate the URL with the Title fetched from Omdb
+    url = slug(data.Title.toLowerCase())
+    movie.url = url.replace(/[^a-z0-9-]/g, '')
+
     movie.save (err) ->
       if (err)
         console.log('error')
