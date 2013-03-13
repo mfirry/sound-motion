@@ -8,7 +8,7 @@ var express = require('express')
   , _       = require('underscore');
 
 /**
- * Internal module
+ * Internal modules
  */  
 var database = require("./database.js");
 
@@ -137,55 +137,7 @@ app.get('/movie/:name', function (req, res) {
     });
 });
 
-// app.get('/create', function(req, res) {
-//     var de = require('./data_entry');
-// 
-//     // Empty the mongodb collection
-//     database.Movie.remove({}, function(){
-//       console.log("== REMOVED ALL MOVIES ==")
-//       // Fill it with the objects from the data_entry file
-//       for (var k in de.movies) {
-//         console.log('inserting :' + de.movies[k].title);
-//         new database.Movie(de.movies[k]).save();
-//       }
-//       res.send("ok");
-//     });
-// });
-
 app.get('/all', function(req, res) { all(res); });
-
-// app.get('/imdb', function(req, res) { 
-//   imdb(); 
-//   res.send("ok"); 
-// });
-
-app.get('/anteo', function(req, res) {
-  res.render('anteo');
-});
-
-app.get('/mexico', function(req, res) {
-  res.render('mexico');
-});
-
-app.get('/arcobaleno', function(req, res) {
-  res.render('arcobaleno');
-});
-
-app.get('/entry', function(req, res) {
-  res.render('entry');
-});
-
-// app.post('/entry', function(req, res){
-//   console.log('title: ' + req.body.title);
-//   console.log('imdb: ' + req.body.imdb);
-//   console.log('description: ' + req.body.description);
-//   var screenings = new Array();
-//   _.each(req.body.screening, function() {
-//     new Screening({venue: String, dates: [Date]});
-//   });
-//   var m = new database.Movie({ title: req.body.title, imdb: req.body.imdb, description: req.body.description });
-//   res.send("ok");
-// });
 
 app.listen(app.get('port') || process.env.PORT || 3000, function() {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
