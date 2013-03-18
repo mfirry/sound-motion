@@ -19,7 +19,7 @@ app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'html');
   app.engine('.html', cons.mustache);
-  app.use(express.favicon());
+  app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
   app.use(express.logger('default'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
