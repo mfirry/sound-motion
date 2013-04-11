@@ -16,12 +16,13 @@
     "mongodb": "*",
     "async": "0.1.22",
     "date-utils": "1.2.11",
-    "restler": "*",
+    "restler": "git://github.com/QuePort/restler.git",
     "underscore": "*",
     "spreadsheet": "*",
     "async": "*",
     "coffee-script": "*",
-    "slug": "*"
+    "slug": "*",
+    "request": "*"
   },
   "engines": {
     "node": "0.8.6",

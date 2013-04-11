@@ -6,10 +6,14 @@ rest        = require('restler')
 Spreadsheet = require("spreadsheet")
 async       = require("async")
 slug        = require("slug")
+request     = require('request')
+fs          = require('fs')
 database    = require('../database')
 
 movies = {}
 inserted = 0
+
+process.setMaxListeners(0)
 
 parse = (id, venue, callback) ->
 
@@ -78,10 +82,13 @@ imdb = (movie, done) ->
     parser: rest.parsers.json
   }).on 'complete', (data) ->
     if (data.Poster)
-      console.log("Wgetting poster image for " + movie.title)
 
-      tmp = data.Poster.split('http://ia.media-imdb.com/images/M/')
-      exec = require('child_process').exec
+      filename = data.Poster.split('http://ia.media-imdb.com/images/M/')
+
+      request.head data.Poster, (err, res, body) ->
+        request(data.Poster).pipe(fs.createWriteStream('public/img/filename'))
+        console.log("Downloaded poster image for " + movie.title)
+
       child = exec 'wget -nc -P public/img/posters/ ' + data.Poster,
         (error, stdout, stderr) ->
           # console.log('stdout: ' + stdout)
