@@ -65,6 +65,14 @@ function render(res, movies, all) {
 
   res.render('index', {
     movies: movies,
+    poster_url: function() {
+      return function(text, render) {
+        var filename = render(text).split(
+          'http:&#x2F;&#x2F;ia.media-imdb.com&#x2F;images&#x2F;M&#x2F;'
+          )[1];
+        return 'img/posters/' + filename;
+      }
+    },
     date_month: function() {
       return function(text, render) {
         var date = moment(new Date(render(text)));
@@ -132,6 +140,14 @@ app.get('/movie/:name', function(req, res) {
     else {
       res.render("detail", {
         movie: movie,
+        poster_url: function() {
+          return function(text, render) {
+            var filename = render(text).split(
+              'http:&#x2F;&#x2F;ia.media-imdb.com&#x2F;images&#x2F;M&#x2F;'
+              )[1];
+            return '/img/posters/' + filename;
+          }
+        },
         date_month: function() {
           return function(text, render) {
             var date = moment(new Date(render(text)));

@@ -81,14 +81,16 @@ imdb = (movie, done) ->
     query: query,
     parser: rest.parsers.json
   }).on 'complete', (data) ->
-    movie.omdb = data
+    movie.omdb = data    
 
     if (data.Poster)
 
-      filename = data.Poster.split('http://ia.media-imdb.com/images/M/')
+      filename = data.Poster.split('http://ia.media-imdb.com/images/M/')[1]
 
       request.head data.Poster, (err, res, body) ->
-        request(data.Poster).pipe(fs.createWriteStream('public/img/filename'))
+        request(data.Poster).pipe(
+          fs.createWriteStream('public/img/posters/'+filename)
+          )
         console.log("Downloaded poster image for " + movie.title)
 
     # Generate the URL with the Title fetched from Omdb
