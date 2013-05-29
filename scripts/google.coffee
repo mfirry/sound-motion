@@ -81,6 +81,8 @@ imdb = (movie, done) ->
     query: query,
     parser: rest.parsers.json
   }).on 'complete', (data) ->
+    movie.omdb = data
+
     if (data.Poster)
 
       filename = data.Poster.split('http://ia.media-imdb.com/images/M/')
@@ -88,16 +90,6 @@ imdb = (movie, done) ->
       request.head data.Poster, (err, res, body) ->
         request(data.Poster).pipe(fs.createWriteStream('public/img/filename'))
         console.log("Downloaded poster image for " + movie.title)
-
-      child = exec 'wget -nc -P public/img/posters/ ' + data.Poster,
-        (error, stdout, stderr) ->
-          # console.log('stdout: ' + stdout)
-          # console.log('stderr: ' + stderr)
-          if (error != null) then console.log('exec error: ' + error)
-
-      data.Poster = tmp[1]
-
-    movie.omdb = data
 
     # Generate the URL with the Title fetched from Omdb
     url = slug(data.Title.toLowerCase())
