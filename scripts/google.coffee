@@ -94,9 +94,18 @@ imdb = (movie, done) ->
         console.log("Downloaded poster image for " + movie.title)
 
     # Generate the URL with the Title fetched from Omdb
-    url = slug(data.Title.toLowerCase())
-    movie.url = url.replace(/[^a-z0-9-]/g, '')
+    if(data.Title)
+      # console.log '\tOH YEAH', data.Title
+      url = slug(data.Title.toLowerCase())
+      movie.url = url.replace(/[^a-z0-9-]/g, '')      
+    else
+      console.log '\tNONE ' + movie.title + ' ' + data.Title 
+      url = slug(movie.title.toLowerCase())
+      movie.url = url.replace(/[^a-z0-9-]/g, '')      
 
+    if(!movie.omdb.Poster)
+      movie.omdb.Poster = "http://ia.media-imdb.com/images/M/cinema.jpg"
+      movie.omdb.Title = movie.title
     movie.save (err) ->
       if (err)
         console.log('error')

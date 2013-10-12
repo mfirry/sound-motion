@@ -1,12 +1,12 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "sound-motion",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.0.0rc4",
+    "express": "3.3.5",
     "hjs": "*",
     "consolidate": "*",
     "mustache": "*",
@@ -19,13 +19,12 @@
     "restler": "git://github.com/QuePort/restler.git",
     "underscore": "*",
     "spreadsheet": "*",
-    "async": "*",
     "coffee-script": "*",
     "slug": "*",
     "request": "*"
   },
   "engines": {
-    "node": "0.8.6",
-    "npm": "1.1.x"
+    "node": "0.10.17",
+    "npm": "1.333.x"
   }
 }
