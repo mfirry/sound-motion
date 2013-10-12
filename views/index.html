@@ -69,7 +69,7 @@
             <div><p><span class="label label-important">There are no screenings this week :(</span></p></div>
           {{/movies}}
           {{#movies}}
-            <div class="cornice">
+            <div class="cornice" id="{{url}}">
               <div class="contAlert">
                 {{#today}}<span class="today">today</span>{{/today}}
                 {{^today}}
@@ -124,7 +124,7 @@
             </div>
           {{/movies}}
           <p>
-            <a class="pulsGenerico" style="display:{{show_all}}" href="/all">show all movies</a>
+            <a class="pulsGenerico" style="display:{{show_all}}" href="/all#{{anchor}}">show all movies</a>
           </p>
           <div class="row-fluid footer">
             <div class="span12" style="margin-top: 20px">
