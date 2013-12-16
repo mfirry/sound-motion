@@ -97,8 +97,7 @@ function render(res, movies, all) {
         return date.format("mm");
       }
     },
-    show_all: all,
-    anchor: movies[0].url
+    show_all: all
   });
 };
 
