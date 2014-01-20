@@ -95,7 +95,7 @@ imdb = (movie, done) ->
 
     # Generate the URL with the Title fetched from Omdb
     if(data.Title)
-      # console.log '\tOH YEAH', data.Title
+      console.log '\tOH YEAH', data.Title
       url = slug(data.Title.toLowerCase())
       movie.url = url.replace(/[^a-z0-9-]/g, '')      
     else
@@ -106,6 +106,8 @@ imdb = (movie, done) ->
     if(!movie.omdb.Poster)
       movie.omdb.Poster = "http://ia.media-imdb.com/images/M/cinema.jpg"
       movie.omdb.Title = movie.title
+    if(movie.title=="STILL LIFE")
+      movie.omdb.Poster = "http://ia.media-imdb.com/images/M/Still-Life-film-2013.jpg"
     movie.save (err) ->
       if (err)
         console.log('error')
