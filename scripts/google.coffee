@@ -106,8 +106,6 @@ imdb = (movie, done) ->
     if(!movie.omdb.Poster)
       movie.omdb.Poster = "http://ia.media-imdb.com/images/M/cinema.jpg"
       movie.omdb.Title = movie.title
-    if(movie.title=="STILL LIFE")
-      movie.omdb.Poster = "http://ia.media-imdb.com/images/M/Still-Life-film-2013.jpg"
     movie.save (err) ->
       if (err)
         console.log('error')
