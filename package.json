@@ -6,25 +6,18 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.3.5",
-    "hjs": "*",
-    "consolidate": "*",
-    "mustache": "*",
-    "mongoose": "*",
-    "moment": "*",
-    "moment-range": "*",
-    "mongodb": "*",
-    "async": "0.1.22",
-    "date-utils": "1.2.11",
-    "restler": "git://github.com/QuePort/restler.git",
-    "underscore": "*",
-    "spreadsheet": "*",
-    "coffee-script": "*",
-    "slug": "*",
-    "request": "*"
+    "consolidate": "^0.10.0",
+    "express": "^4.11.2",
+    "fs": "0.0.2",
+    "hjs": "0.0.6",
+    "immutable": "^3.6.2",
+    "mongoose": "^3.8.22",
+    "ramda": "^0.9.1",
+    "request": "^2.53.0",
+    "slug": "^0.8.0",
+    "spreadsheet": "^0.3.0"
   },
   "engines": {
-    "node": "0.10.17",
-    "npm": "1.3.11"
+    "node": "0.10.36"
   }
 }
