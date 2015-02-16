@@ -32,6 +32,7 @@ app.configure('development', function() {
 });
 
 function render(res, movies, all) {
+  console.log('movies.length:', movies.length);
   _.each(movies, function(m) {
     m.today = false;
     _.each(m.screenings, function(s) {
