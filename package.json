@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "express": "3.3.5",
-    "hjs": "*",
-    "consolidate": "*",
+    "hjs": "latest",
+    "consolidate": "latest",
     "mustache": "*",
     "mongoose": "4.3.7",
     "moment": "*",
@@ -17,12 +17,11 @@
     "async": "0.1.22",
     "date-utils": "1.2.11",
     "restler": "git://github.com/QuePort/restler.git",
-    "underscore": "*",
+    "underscore": "latest",
     "spreadsheet": "*",
     "coffee-script": "*",
-    "slug": "*",
-    "request": "*",
-    "kerberos": "*"
+    "slug": "latest",
+    "request": "latest"
   },
   "engines": {
     "node": "5.2.x",
