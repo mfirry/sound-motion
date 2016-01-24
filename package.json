@@ -25,7 +25,7 @@
     "kerberos": "*"
   },
   "engines": {
-    "node": "*",
-    "npm": "*"
+    "node": "5.2.x",
+    "npm": "3.3.x"
   }
 }
