@@ -115,6 +115,7 @@ function all(res) {
 };
 
 app.get('/', function(req, res) {
+  console.log('HERE I AM');
   var lastSunday = moment(new Date())
     .day(0)
     .toDate();
