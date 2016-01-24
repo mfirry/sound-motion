@@ -21,7 +21,8 @@
     "spreadsheet": "*",
     "coffee-script": "*",
     "slug": "*",
-    "request": "*"
+    "request": "*"i,
+    "kerberos": "*"
   },
   "engines": {
     "node": "*",
