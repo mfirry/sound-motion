@@ -114,28 +114,24 @@ function all(res) {
   });
 };
 
-app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
+app.get('/', function(req, res) {
+  var lastSunday = moment(new Date())
+    .day(0)
+    .toDate();
+  var nextSunday = moment(new Date())
+    .day(14)
+    .toDate();
+
+  var query = database.Movie.where("screenings.dates")
+    .gte(lastSunday)
+    .lte(nextSunday);
+  query.sort({
+    "screenings.dates": 1
+  });
+  query.exec(function(err, movies) {
+    render(res, movies, 'show');
+  });
 });
-
-// app.get('/', function(req, res) {
-//   var lastSunday = moment(new Date())
-//     .day(0)
-//     .toDate();
-//   var nextSunday = moment(new Date())
-//     .day(14)
-//     .toDate();
-
-//   var query = database.Movie.where("screenings.dates")
-//     .gte(lastSunday)
-//     .lte(nextSunday);
-//   query.sort({
-//     "screenings.dates": 1
-//   });
-//   query.exec(function(err, movies) {
-//     render(res, movies, 'show');
-//   });
-// });
 
 app.get('/movie/:name', function(req, res) {
   var query = database.Movie.findOne({
