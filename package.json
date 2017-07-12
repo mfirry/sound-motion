@@ -24,7 +24,6 @@
     "request": "latest"
   },
   "engines": {
-    "node": "5.2.x",
-    "npm": "3.3.x"
+    "node": "6.11.1"
   }
 }
